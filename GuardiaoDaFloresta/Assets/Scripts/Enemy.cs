@@ -3,40 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class Lenhador : MonoBehaviour
-{
+[RequireComponent(typeof(Animator))]
 
+public class Enemy : MonoBehaviour
+{
     public Transform target;
     private NavMeshAgent agent;
     private Animator anim;
-    public float animationDistanceThreshold;
+    public float animationDistanceThreshold = 4f;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        
+        agent.updatePosition = false;
+    }
 
-    } 
- 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        if (target == null)
-        {
-            agent.isStopped = true;
-            anim.SetBool("IsMoving", false);
-            anim.SetBool("Attacking", false);
-            return;
-        }
-
         agent.SetDestination(target.position);
-
-
 
         if (agent.velocity.magnitude > 0)
         {
@@ -47,21 +34,24 @@ public class Lenhador : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        Vector3 worldDeltaPosition = agent.nextPosition - transform.position;
+        float distanceToTarget = worldDeltaPosition.magnitude;
 
         if (distanceToTarget <= animationDistanceThreshold)
         {
-            anim.SetBool("Attacking", true);
+            anim.SetTrigger("AttackTrigger");
 
 
 
         }
         else
         {
-            anim.SetBool("Attacking", false);
+            anim.SetTrigger("AttackTrigger");
 
         }
 
-        
+        transform.position = agent.nextPosition;
     }
+
+    
 }
