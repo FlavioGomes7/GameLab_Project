@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordDamage : MonoBehaviour
+public class EnemyDamage : MonoBehaviour
 {
-    public int damage = 25;
+    public int damage;
 
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Tree"))
         {
-            EnemyStats stats = other.GetComponent<EnemyStats>();
+            TreeStats stats = other.GetComponent<TreeStats>();
             {
                 if (stats != null)
                 {
