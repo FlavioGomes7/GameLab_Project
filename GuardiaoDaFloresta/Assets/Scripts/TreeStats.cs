@@ -21,4 +21,13 @@ public class TreeStats : MonoBehaviour
 
         healthBar.SetCurrentHealth(currentHealth);
     }
+
+    void Update()
+    {
+
+        if (currentHealth == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
