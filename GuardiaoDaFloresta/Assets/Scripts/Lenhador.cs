@@ -35,7 +35,7 @@ public class Lenhador : MonoBehaviour
     void Update()
     {
         agent.SetDestination(target.position);
-        Debug.Log(currentHealth);
+        
         if (target == null)
         {
             
