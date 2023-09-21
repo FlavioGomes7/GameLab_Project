@@ -322,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1278004198}
   animationDistanceThreshold: 2.5
+  maxHealth: 10
 --- !u!95 &855826770
 Animator:
   serializedVersion: 7

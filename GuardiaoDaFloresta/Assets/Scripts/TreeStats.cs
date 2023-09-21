@@ -13,6 +13,7 @@ public class TreeStats : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
     }
 
     public void MakeDammage(int dammage)
