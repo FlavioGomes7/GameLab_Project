@@ -66,20 +66,5 @@ public class InputHandler : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Lenhador stats = other.GetComponent<Lenhador>();
-            {
-                if (stats != null)
-                {
-                    stats.TakeDamage(attackDamage);
-                }
-            }
-
-        }
-
-    }
 
 }
