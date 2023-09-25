@@ -34,16 +34,17 @@ public class Lenhador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+       
         
         if (target == null)
         {
-            
             agent.isStopped = true;
             anim.SetBool("IsMoving", false);
             anim.SetBool("Attacking", false);
             return;
         }
+
+        agent.SetDestination(target.position);
 
 
 
