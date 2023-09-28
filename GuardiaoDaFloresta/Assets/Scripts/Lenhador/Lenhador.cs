@@ -57,9 +57,9 @@ public class Lenhador : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+       
 
-        if (distanceToTarget <= animationDistanceThreshold)
+        if (Vector3.Distance(agent.destination, transform.position) <= animationDistanceThreshold)
         {
             anim.SetBool("Attacking", true);
 
