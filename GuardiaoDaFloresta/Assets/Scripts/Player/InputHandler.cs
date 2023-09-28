@@ -16,11 +16,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime;
     [SerializeField] private float turnSmoothVelocity;
-
-    //Player Stats
-    private int maxHealth;
-    private int currentHealth;
-    [SerializeField] private int attackDamage;
+    
 
     public void Start()
     {
@@ -58,12 +54,29 @@ public class InputHandler : MonoBehaviour
     {
         
         Debug.Log(callback.phase);
-        if(callback.phase == InputActionPhase.Started)
+     
+        if(callback.phase == InputActionPhase.Performed)
         {
-            animator.SetTrigger("isAttacking");
+            animator.SetTrigger("attacking");
+        }
+        else if(callback.phase == InputActionPhase.Canceled)
+        {
+            animator.SetTrigger("canceled");
         }
 
-        
+         
+    }
+
+    public void OnFinalAttack(InputAction.CallbackContext callback)
+    {
+        if(callback.phase == InputActionPhase.Performed)
+        {
+            animator.SetTrigger("finalAttacking");
+        }
+        else if(callback.phase == InputActionPhase.Canceled)
+        {
+            animator.SetTrigger("canceled");
+        }
     }
 
 
