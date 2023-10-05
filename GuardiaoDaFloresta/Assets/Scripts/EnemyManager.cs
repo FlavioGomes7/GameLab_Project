@@ -32,9 +32,9 @@ public class EnemyManager : MonoBehaviour
             if (c.CompareTag("Player"))
             {
                 float signedAngle = Vector3.Angle(transform.forward, c.transform.position - transform.position);
-                if(Mathf.Abs(signedAngle) < fovAngle / 2)
-                {
-                    playerInFOV = true;
+                if(Mathf.Abs(signedAngle) < fovAngle / 2 && !ObstacleBetween(transform.position, c.transform.position))
+                {   
+                  playerInFOV = true;   
                 }
                 break;
             }
@@ -82,4 +82,25 @@ public class EnemyManager : MonoBehaviour
 
         }
     }
+
+    private bool ObstacleBetween(Vector3 start, Vector3 end)
+    {
+       
+        Vector3 direction = end - start;
+        float distance = direction.magnitude;
+        Ray ray = new Ray(start, direction);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            if (!hit.collider.CompareTag("Player"))
+            {
+                
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
+
