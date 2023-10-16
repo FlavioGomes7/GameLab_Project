@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
+    public static InputHandler instance;
+
     //Player Components
     private CharacterController cc;
     private Animator animator;
@@ -16,22 +18,32 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime;
     [SerializeField] private float turnSmoothVelocity;
-    
 
-    public void Start()
+    public bool canReceiveInput;
+    public bool inputReceived;
+   
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    private void Update()
     {
         if(movement.magnitude >= 1)
         {
+
             cc.Move(movement * speed * Time.deltaTime);
             float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            
         }
        
     }
@@ -50,34 +62,34 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext callback)
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        
-        Debug.Log(callback.phase);
-     
-        if(callback.phase == InputActionPhase.Performed)
+        if(context.performed)
         {
-            animator.SetTrigger("attacking");
+            if (canReceiveInput)
+            {
+                inputReceived = true;
+                canReceiveInput = false;
+            }
+            else
+            {
+                return;
+            }
         }
-        else if(callback.phase == InputActionPhase.Canceled)
-        {
-            animator.SetTrigger("canceled");
-        }
-
-         
     }
 
-    public void OnFinalAttack(InputAction.CallbackContext callback)
+    public void AttackManger()
     {
-        if(callback.phase == InputActionPhase.Performed)
+        if(!canReceiveInput)
         {
-            animator.SetTrigger("finalAttacking");
+            canReceiveInput = true;
         }
-        else if(callback.phase == InputActionPhase.Canceled)
+        else
         {
-            animator.SetTrigger("canceled");
+            canReceiveInput = false;
         }
     }
+
 
 
 }

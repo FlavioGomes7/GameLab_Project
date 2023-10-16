@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "FinalAttack",
-                    "type": "Button",
-                    "id": "f25b8dc5-d4b8-4254-80fc-3b6b22f22cee",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -93,21 +84,10 @@
                     "name": "",
                     "id": "6016b432-f155-4066-9cc6-6c998628a672",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9b9c187b-83ed-4f87-be73-ef7ddecfdfdc",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "MultiTap(tapTime=0.2,tapDelay=0.75,tapCount=4)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FinalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

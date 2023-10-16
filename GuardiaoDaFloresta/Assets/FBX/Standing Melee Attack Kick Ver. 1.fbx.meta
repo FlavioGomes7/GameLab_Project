@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1fc591cebbe70034da60dd535a0d8fda
+guid: 8e40ff8cc32d55242aa6ffe2c2e4a4a5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Two Hand Sword Combo
+      name: Attack 2
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 196
+      lastFrame: 111
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -44,7 +44,7 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
+      loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
