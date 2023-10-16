@@ -28,5 +28,20 @@ public class EnemyManagerEditor : Editor
         Handles.color = c;
         enemy.fov = Handles.ScaleValueHandle(enemy.fov, enemy.transform.position + enemy.transform.forward * enemy.fov, 
         enemy.transform.rotation, 3, Handles.SphereHandleCap, 1);
+
+
+        Color d = Color.green;
+        if (enemy.shortAlertStage == AlertStage.Curioso)
+        {
+            d = Color.red;
+        }
+        
+
+        Handles.color = new Color(d.r, d.g, d.b, 0.3f);
+        Handles.DrawSolidArc(enemy.transform.position, enemy.transform.up,
+        Quaternion.AngleAxis(-enemy.shortFovAngle / 2f, enemy.transform.up) * enemy.transform.forward, enemy.shortFovAngle, enemy.shortFov);
+        Handles.color = d;
+        enemy.shortFov = Handles.ScaleValueHandle(enemy.shortFov, enemy.transform.position + enemy.transform.forward * enemy.shortFov,
+        enemy.transform.rotation, 3, Handles.SphereHandleCap, 1);
     }
 }
