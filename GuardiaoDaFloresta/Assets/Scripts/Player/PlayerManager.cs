@@ -24,9 +24,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerScriptableObject playerStats;
 
     //Método para danificar inimigo
-    public float DealDamage()
+    public float DealDamage(float enemyHp)
     {
-        return damageCurrent;
+        enemyHp -= damageCurrent;
+        return enemyHp;
     }
 
     //Método para receber dano e verificar se está vivo ou morto
@@ -72,10 +73,9 @@ public class PlayerManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
        
-        if(other.CompareTag("EnemyAttack"))
+        if(other.CompareTag("Enemy"))
         {
-
-            TakeDamage();
+            DealDamage(other.GetComponent<Lenhador>().currentHealth);
         }
 
     }

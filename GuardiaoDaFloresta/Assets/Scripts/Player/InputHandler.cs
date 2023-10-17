@@ -17,7 +17,11 @@ public class InputHandler : MonoBehaviour
     private Vector3 movement;
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime;
-    [SerializeField] private float turnSmoothVelocity;
+    private float turnSmoothVelocity;
+
+    //Player Dash
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
 
     public bool canReceiveInput;
     public bool inputReceived;
@@ -78,6 +82,14 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
     public void AttackManger()
     {
         if(!canReceiveInput)
@@ -90,6 +102,18 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dashTime)
+        {
+            cc.Move(movement * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+
+    }
 
 
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Playerstats
   m_EditorClassIdentifier: 
   hpMax: 0
-  damageMax: 0
+  damageMax: 1
   speedMax: 0
   speedRateMax: 0
   dashRedCooldown: 0
