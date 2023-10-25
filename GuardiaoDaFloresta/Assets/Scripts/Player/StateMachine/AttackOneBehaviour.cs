@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AttackOneBehaviour : StateMachineBehaviour
 {
-    GameObject weaponObject;
-    CapsuleCollider capsuleCollider;
+    GameObject player;
+    Collider frontCollider;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        weaponObject = GameObject.FindGameObjectWithTag("Weapon");
-        capsuleCollider = weaponObject.GetComponent<CapsuleCollider>();
-        if (weaponObject != null)
+        player = GameObject.FindGameObjectWithTag("Player");
+        frontCollider = player.GetComponent<BoxCollider>();
+        if (player != null)
         {
-            capsuleCollider.enabled = true;
+            frontCollider.enabled = true;
         }
     
     }
@@ -27,9 +27,9 @@ public class AttackOneBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (weaponObject != null)
+        if (player != null)
         {
-            capsuleCollider.enabled = false;
+            frontCollider.enabled = false;
         }
     }
 

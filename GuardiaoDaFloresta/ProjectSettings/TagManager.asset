@@ -6,13 +6,11 @@ TagManager:
   tags:
   - Tree
   - Enemy
-  - Weapon
-  - Kick
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

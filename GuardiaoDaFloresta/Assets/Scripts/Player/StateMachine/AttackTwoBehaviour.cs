@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AttackTwoBehaviour : StateMachineBehaviour
 {
-    GameObject kickObject;
-    SphereCollider sphereCollider;
+    GameObject player;
+    Collider circleCollider;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        kickObject = GameObject.FindGameObjectWithTag("Kick");
-        sphereCollider = kickObject.GetComponent<SphereCollider>();
-        if (kickObject != null)
+        player = GameObject.FindGameObjectWithTag("Player");
+        circleCollider = player.GetComponent<SphereCollider>();
+        if (player != null)
         {
-            sphereCollider.enabled = true;
+            circleCollider.enabled = true;
         }
 
     }
@@ -27,9 +27,9 @@ public class AttackTwoBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (kickObject != null)
+        if (player != null)
         {
-            sphereCollider.enabled = false;
+            circleCollider.enabled = false;
         }
 
     }
