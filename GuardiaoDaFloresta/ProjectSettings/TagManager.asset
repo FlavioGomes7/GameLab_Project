@@ -6,16 +6,18 @@ TagManager:
   tags:
   - Tree
   - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
   - Enemy
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - whaiIsGround
+  - whatIsPlayer
+  - Obstacle
   - 
   - 
   - 

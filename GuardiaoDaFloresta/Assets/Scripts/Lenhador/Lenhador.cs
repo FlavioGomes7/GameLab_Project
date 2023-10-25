@@ -34,16 +34,17 @@ public class Lenhador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+       
         
         if (target == null)
         {
-            
             agent.isStopped = true;
             anim.SetBool("IsMoving", false);
             anim.SetBool("Attacking", false);
             return;
         }
+
+        agent.SetDestination(target.position);
 
 
 
@@ -56,9 +57,9 @@ public class Lenhador : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+       
 
-        if (distanceToTarget <= animationDistanceThreshold)
+        if (Vector3.Distance(agent.destination, transform.position) <= animationDistanceThreshold)
         {
             anim.SetBool("Attacking", true);
 
