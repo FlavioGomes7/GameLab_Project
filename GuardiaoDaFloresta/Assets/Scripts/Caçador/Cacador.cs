@@ -11,10 +11,20 @@ public class Cacador : MonoBehaviour
     public Transform spawnPoint;
     public float shootForce;
     EnemyManager enemyManager;
-
+    public bool atirando;
+    Rigidbody rb;
     [SerializeField] private float timer = 5;
-
+    private float velocidadePadrao; 
+    private float velocidadeRotacaoPadrao;
     private float bulletTime;
+    private float maxSpeed = 40f;
+    private float maxAngularSpeed = 1000f;
+    private float maxAcelerationSpeed = 20f;
+    private float minSpeed = 15f;
+    private float minAngularSpeed = 400f;
+    private float minAcelerationSpeed = 8f;
+
+
 
     public float range; 
 
@@ -23,22 +33,27 @@ public class Cacador : MonoBehaviour
     private void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        atirando = false;
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
 
-        if (enemyManager.alertLevel >= 50) 
+        if (enemyManager.alertStage == AlertStage.Curioso) 
         {
             Moving();
         }
-        if(enemyManager.alertLevel >= 200)
+        if(enemyManager.alertStage == AlertStage.Matar)
         {
             ShootPlayer();
             Moving();
+            atirando = true;
+           
         }
         else
         {
+            atirando = false;
             if (cacador.remainingDistance <= cacador.stoppingDistance) 
             {
                 Vector3 point;
@@ -49,7 +64,30 @@ public class Cacador : MonoBehaviour
                 }
             }
         }
-        if(enemyManager.shortAlertLevel >= 50)
+        if(enemyManager.alertStage == AlertStage.Caca)
+        {
+            
+            cacador.speed = maxSpeed; 
+            cacador.angularSpeed = maxAngularSpeed;
+            cacador.acceleration = maxAcelerationSpeed;
+            if (cacador.remainingDistance <= cacador.stoppingDistance)
+            {
+                Vector3 point;
+                if (RandomPoint(centrePoint.position, range, out point))
+                {
+                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
+                    cacador.SetDestination(point);
+                }
+            }
+
+        }
+        else
+        {
+            cacador.speed = minSpeed;
+            cacador.angularSpeed = minAngularSpeed;
+            cacador.acceleration = minAcelerationSpeed;
+        }
+        if (enemyManager.shortAlertLevel == 50)
         {
             Moving();
         }
@@ -65,8 +103,8 @@ public class Cacador : MonoBehaviour
                 }
             }
         }
-
        
+
 
     }
 
@@ -83,8 +121,19 @@ public class Cacador : MonoBehaviour
 
     private void Moving()
     {
-        cacador.SetDestination(player.position);
         
+        cacador.SetDestination(player.position);
+
+        if (atirando)
+        {
+            gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        }
+        else
+        {
+            return;
+        }
+
+
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)

@@ -327,6 +327,7 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 610839156}
   shootForce: 4000
+  atirando: 0
   timer: 0.3
   range: 50
   centrePoint: {fileID: 134596164}
@@ -382,6 +383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7430fa600847f3468009b524bd42c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cacaDuration: 20
+  cacaTimer: 0
   fov: 50
   fovAngle: 80
   shortFov: 8
@@ -1604,6 +1607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7430fa600847f3468009b524bd42c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cacaDuration: 30
+  cacaTimer: 0
   fov: 50
   fovAngle: 80
   shortFov: 8
@@ -1652,6 +1657,7 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 1682302911}
   shootForce: 4000
+  atirando: 0
   timer: 0.3
   range: 50
   centrePoint: {fileID: 675533103}
@@ -5851,6 +5857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7430fa600847f3468009b524bd42c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cacaDuration: 30
+  cacaTimer: 0
   fov: 50
   fovAngle: 80
   shortFov: 8
@@ -5899,6 +5907,7 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 1720015333}
   shootForce: 4000
+  atirando: 0
   timer: 0.3
   range: 50
   centrePoint: {fileID: 1811639859}
