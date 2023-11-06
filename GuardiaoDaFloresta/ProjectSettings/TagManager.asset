@@ -11,15 +11,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
+  - Enemy
   - Player
   - Water
   - UI
   - whaiIsGround
   - whatIsPlayer
   - Obstacle
-  - Enemy
-  - 
-  - 
+  - Wall
+  - Hunter
   - 
   - 
   - 

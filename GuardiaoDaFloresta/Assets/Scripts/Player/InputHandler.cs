@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
+    public static InputHandler instance;
+
     //Player Components
     private CharacterController cc;
     private Animator animator;
@@ -15,27 +17,37 @@ public class InputHandler : MonoBehaviour
     private Vector3 movement;
     [SerializeField] private float speed;
     [SerializeField] private float turnSmoothTime;
-    [SerializeField] private float turnSmoothVelocity;
+    private float turnSmoothVelocity;
 
-    //Player Stats
-    private int maxHealth;
-    private int currentHealth;
-    [SerializeField] private int attackDamage;
+    //Player Dash
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
 
-    public void Start()
+    public bool canReceiveInput;
+    public bool inputReceived;
+   
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
     {
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    private void Update()
     {
         if(movement.magnitude >= 1)
         {
+
             cc.Move(movement * speed * Time.deltaTime);
             float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            
         }
        
     }
@@ -54,16 +66,53 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void OnAttack(InputAction.CallbackContext callback)
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        
-        Debug.Log(callback.phase);
-        if(callback.phase == InputActionPhase.Started)
+        if(context.performed)
         {
-            animator.SetTrigger("isAttacking");
+            if (canReceiveInput)
+            {
+                inputReceived = true;
+                canReceiveInput = false;
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    public void AttackManger()
+    {
+        if(!canReceiveInput)
+        {
+            canReceiveInput = true;
+        }
+        else
+        {
+            canReceiveInput = false;
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dashTime)
+        {
+            cc.Move(movement * dashSpeed * Time.deltaTime);
+            yield return null;
         }
 
-        
+
     }
 
 

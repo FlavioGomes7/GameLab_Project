@@ -16,7 +16,7 @@ public class Lenhador : MonoBehaviour
 
     //Enemy stats
     [SerializeField] private int maxHealth;
-    private int currentHealth;
+    public float currentHealth;
 
     //Enemy UI
     [SerializeField] private Slider slider;
@@ -75,7 +75,7 @@ public class Lenhador : MonoBehaviour
        
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         SetCurrentHealth(currentHealth);
@@ -101,7 +101,7 @@ public class Lenhador : MonoBehaviour
         slider.maxValue = maxHealth;
     }
 
-    public void SetCurrentHealth(int currentHealth)
+    public void SetCurrentHealth(float currentHealth)
     {
         slider.value = currentHealth;
     }
