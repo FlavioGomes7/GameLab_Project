@@ -17,12 +17,12 @@ public class Cacador : MonoBehaviour
     private float velocidadePadrao; 
     private float velocidadeRotacaoPadrao;
     private float bulletTime;
-    private float maxSpeed = 40f;
+    private float maxSpeed = 20f;
     private float maxAngularSpeed = 1000f;
-    private float maxAcelerationSpeed = 20f;
-    private float minSpeed = 15f;
+    private float maxAcelerationSpeed = 10f;
+    private float minSpeed = 10f;
     private float minAngularSpeed = 400f;
-    private float minAcelerationSpeed = 8f;
+    private float minAcelerationSpeed = 5f;
 
 
 
@@ -64,7 +64,7 @@ public class Cacador : MonoBehaviour
                 }
             }
         }
-        if(enemyManager.alertStage == AlertStage.Caca)
+        if(enemyManager.alertStage == AlertStage.Caca || enemyManager.alertStage == AlertStage.Matar)
         {
             
             cacador.speed = maxSpeed; 
