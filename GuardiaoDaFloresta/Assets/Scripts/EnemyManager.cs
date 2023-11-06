@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEditor;
 
 public enum AlertStage
 {
@@ -27,10 +28,10 @@ public class EnemyManager : MonoBehaviour
 
 
     public AlertStage alertStage;
-    [Range(0, 300)] public float alertLevel;
+    [Range(0, 200)] public float alertLevel;
 
     public AlertStage shortAlertStage;
-    [Range(0, 300)] public float shortAlertLevel;
+    [Range(0, 50)] public float shortAlertLevel;
 
 
 
@@ -87,8 +88,8 @@ public class EnemyManager : MonoBehaviour
         {
             if (!fovAumentado) 
             {
-                fov += 10;
-                shortFov += 10;
+                fov += 3;
+                shortFov += 1;
                 fovAumentado = true;
             }
         }
@@ -96,8 +97,8 @@ public class EnemyManager : MonoBehaviour
         {
             if (fovAumentado) 
             {
-                fov -= 10; 
-                shortFov -= 10; 
+                fov -= 3; 
+                shortFov -= 1; 
                 fovAumentado = false; 
             }
         }
@@ -124,7 +125,7 @@ public class EnemyManager : MonoBehaviour
                 if(playerInFOV)
                 {
                     alertLevel++;
-                    if(alertLevel >= 300)
+                    if(alertLevel >= 200)
                     {
                         alertStage = AlertStage.Matar;
                         

@@ -12,15 +12,15 @@ TagManager:
   - TransparentFX
   - Ignore Raycast
   - Enemy
-  - Player
   - Water
+  - UI
   - UI
   - whaiIsGround
   - whatIsPlayer
   - Obstacle
   - Wall
   - Hunter
-  - 
+  - Player
   - 
   - 
   - 
