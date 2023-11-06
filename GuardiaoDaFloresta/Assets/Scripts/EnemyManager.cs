@@ -7,13 +7,17 @@ public enum AlertStage
 {
     Paz,
     Curioso,
-    Matar
+    Matar,
+    Caca
+
 }
 
 public class EnemyManager : MonoBehaviour
 {
     Cacador cacador;
-   
+    private bool fovAumentado;
+    public float cacaDuration = 20; 
+    public float cacaTimer; 
 
     public float fov;
     [Range(0, 360)] public float fovAngle;
@@ -30,9 +34,12 @@ public class EnemyManager : MonoBehaviour
 
 
 
+
     private void Start()
     {
         cacador = GetComponent<Cacador>();
+        fovAumentado = false;
+        
     }
 
     private void Awake()
@@ -76,6 +83,26 @@ public class EnemyManager : MonoBehaviour
 
         }
 
+        if (alertStage == AlertStage.Matar || alertStage == AlertStage.Caca)
+        {
+            if (!fovAumentado) 
+            {
+                fov += 10;
+                shortFov += 10;
+                fovAumentado = true;
+            }
+        }
+        else
+        {
+            if (fovAumentado) 
+            {
+                fov -= 10; 
+                shortFov -= 10; 
+                fovAumentado = false; 
+            }
+        }
+
+
 
         UpdateAlertStage(playerInFOV);
         UpdateShortAlertStage(playerInShortFOV);
@@ -115,11 +142,30 @@ public class EnemyManager : MonoBehaviour
                 }
                 break;
                 case AlertStage.Matar:
+                cacaTimer = 20;
                 if (!playerInFOV)
                 {
-                    alertStage = AlertStage.Curioso;
+                    alertStage = AlertStage.Caca;
                 } 
                 break;
+                case AlertStage.Caca:
+                alertLevel = 199;
+                cacaTimer -= Time.deltaTime; 
+                if (cacaTimer <= 0)
+                {
+                    
+                    alertStage = AlertStage.Paz;
+                    alertLevel = 0;
+                    cacaTimer = cacaDuration; 
+                }
+                if (playerInFOV)
+                {
+                    alertStage = AlertStage.Matar;
+                    
+
+                }
+                break;
+
 
         }
     }
@@ -172,5 +218,7 @@ public class EnemyManager : MonoBehaviour
 
         return false;
     }
+
+    
 }
 
