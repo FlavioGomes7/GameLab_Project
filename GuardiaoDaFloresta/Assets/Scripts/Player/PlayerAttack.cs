@@ -18,15 +18,28 @@ public class PlayerAttack : MonoBehaviour
         attackRangeMax = playerStats.RangeMax;
         damageMax = playerStats.DamageMax;
         damageCurrent = damageMax;
+
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        Lenhador lenhadorComponent = other.GetComponent<Lenhador>();
+        Cacador cacadorComponent = other.GetComponent<Cacador>();
 
-        if(other.CompareTag("Enemy"))
+        if (lenhadorComponent != null)
         {
-           other.GetComponent<Lenhador>().TakeDamage(damageCurrent);
+            lenhadorComponent.TakeDamage(damageCurrent);
         }
+        if (cacadorComponent != null)
+        {
+            cacadorComponent.TakeDamage(damageCurrent);
+        }
+        
+        
+
+
+
+
 
     }
 

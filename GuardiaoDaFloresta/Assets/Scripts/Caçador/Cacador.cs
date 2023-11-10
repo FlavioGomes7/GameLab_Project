@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class Cacador : MonoBehaviour
 {
@@ -24,7 +26,13 @@ public class Cacador : MonoBehaviour
     private float minAngularSpeed = 400f;
     private float minAcelerationSpeed = 5f;
     public Transform aim;
+    
 
+    [SerializeField] private int cacadorMaxHealth;
+    public float currentHealth;
+
+    //Enemy UI
+    [SerializeField] private Slider cacadorSlider;
 
 
     public float range; 
@@ -33,78 +41,83 @@ public class Cacador : MonoBehaviour
 
     private void Start()
     {
+        
         enemyManager = GetComponent<EnemyManager>();
         atirando = false;
         rb = GetComponent<Rigidbody>();
+        currentHealth = cacadorMaxHealth;
+        SetMaxHealth(cacadorMaxHealth);
+        
     }
 
     void Update()
     {
-
-        if (enemyManager.alertStage == AlertStage.Curioso) 
-        {
-            Moving();
-        }
-        if(enemyManager.alertStage == AlertStage.Matar)
-        {
-            ShootPlayer();
-            Moving();
-            atirando = true;
-           
-        }
-        else
-        {
-            atirando = false;
-            if (cacador.remainingDistance <= cacador.stoppingDistance) 
-            {
-                Vector3 point;
-                if (RandomPoint(centrePoint.position, range, out point)) 
-                {
-                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); 
-                    cacador.SetDestination(point);
-                }
-            }
-        }
-        if(enemyManager.alertStage == AlertStage.Caca || enemyManager.alertStage == AlertStage.Matar)
-        {
             
-            cacador.speed = maxSpeed; 
-            cacador.angularSpeed = maxAngularSpeed;
-            cacador.acceleration = maxAcelerationSpeed;
-            if (cacador.remainingDistance <= cacador.stoppingDistance)
-            {
-                Vector3 point;
-                if (RandomPoint(centrePoint.position, range, out point))
-                {
-                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-                    cacador.SetDestination(point);
-                }
-            }
 
-        }
-        else
-        {
-            cacador.speed = minSpeed;
-            cacador.angularSpeed = minAngularSpeed;
-            cacador.acceleration = minAcelerationSpeed;
-        }
-        if (enemyManager.shortAlertLevel == 50)
-        {
-            Moving();
-        }
-        else
-        {
-            if (cacador.remainingDistance <= cacador.stoppingDistance)
+            if (enemyManager.alertStage == AlertStage.Curioso)
             {
-                Vector3 point;
-                if (RandomPoint(centrePoint.position, range, out point))
+                Moving();
+            }
+            if (enemyManager.alertStage == AlertStage.Matar)
+            {
+                ShootPlayer();
+                Moving();
+                atirando = true;
+
+            }
+            else
+            {
+                atirando = false;
+                if (cacador.remainingDistance <= cacador.stoppingDistance)
                 {
-                    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-                    cacador.SetDestination(point);
+                    Vector3 point;
+                    if (RandomPoint(centrePoint.position, range, out point))
+                    {
+                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
+                        cacador.SetDestination(point);
+                    }
                 }
             }
-        }
-       
+            if (enemyManager.alertStage == AlertStage.Caca || enemyManager.alertStage == AlertStage.Matar)
+            {
+
+                cacador.speed = maxSpeed;
+                cacador.angularSpeed = maxAngularSpeed;
+                cacador.acceleration = maxAcelerationSpeed;
+                if (cacador.remainingDistance <= cacador.stoppingDistance)
+                {
+                    Vector3 point;
+                    if (RandomPoint(centrePoint.position, range, out point))
+                    {
+                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
+                        cacador.SetDestination(point);
+                    }
+                }
+
+            }
+            else
+            {
+                cacador.speed = minSpeed;
+                cacador.angularSpeed = minAngularSpeed;
+                cacador.acceleration = minAcelerationSpeed;
+            }
+            if (enemyManager.shortAlertLevel == 50)
+            {
+                Moving();
+            }
+            else
+            {
+                if (cacador.remainingDistance <= cacador.stoppingDistance)
+                {
+                    Vector3 point;
+                    if (RandomPoint(centrePoint.position, range, out point))
+                    {
+                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
+                        cacador.SetDestination(point);
+                    }
+                }
+            }
+        
 
 
     }
@@ -130,10 +143,7 @@ public class Cacador : MonoBehaviour
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
             aim.transform.LookAt(player.position);
         }
-        else
-        {
-            
-        }
+        
 
 
     }
@@ -154,5 +164,34 @@ public class Cacador : MonoBehaviour
         return false;
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        SetCurrentHealth(currentHealth);
 
+        // anim de dano
+
+        if (currentHealth < 0)
+        {
+            Die();
+        }
+
+    }
+
+    void Die()
+    {
+        //anim de morte
+        Destroy(gameObject);
+    }
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        cacadorSlider.value = maxHealth;
+        cacadorSlider.maxValue = maxHealth;
+    }
+
+    public void SetCurrentHealth(float currentHealth)
+    {
+        cacadorSlider.value = currentHealth;
+    }
 }
