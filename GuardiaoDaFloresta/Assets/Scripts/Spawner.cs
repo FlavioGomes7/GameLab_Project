@@ -10,11 +10,6 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float numEnemies;
     [SerializeField] private float spawnRate;
 
-    void Start()
-    {
-        Spawn();
-    }
-
     public void Spawn()
     {
 
