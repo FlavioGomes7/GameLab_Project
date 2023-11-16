@@ -7,6 +7,10 @@ TagManager:
   - Tree
   - Enemy
   - Obstacle
+  - "1\xB0Wave"
+  - "2\xB0Wave"
+  - "3\xB0Wave"
+  - "4\xB0Wave"
   layers:
   - Default
   - TransparentFX

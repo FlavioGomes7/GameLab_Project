@@ -21,6 +21,7 @@ public class WavesManager : MonoBehaviour
     void Update()
     {
         timer += 1 * Time.deltaTime;
+        Debug.Log(timer);
         StartWave();
     }
 
@@ -30,7 +31,7 @@ public class WavesManager : MonoBehaviour
         {
             foreach(GameObject spawner in spawnersLenhadores)
             {
-                if(spawner.CompareTag("1° Wave"))
+                if(spawner.CompareTag("1°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -42,7 +43,7 @@ public class WavesManager : MonoBehaviour
 
             foreach(GameObject spawner in spawnersCacadores)
             {
-                if(spawner.CompareTag("1° Wave"))
+                if(spawner.CompareTag("1°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -58,7 +59,7 @@ public class WavesManager : MonoBehaviour
 
             foreach (GameObject spawner in spawnersLenhadores)
             {
-                if (spawner.CompareTag("2° Wave"))
+                if (spawner.CompareTag("2°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -70,7 +71,7 @@ public class WavesManager : MonoBehaviour
 
             foreach (GameObject spawner in spawnersCacadores)
             {
-                if (spawner.CompareTag("2° Wave"))
+                if (spawner.CompareTag("2°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -86,7 +87,7 @@ public class WavesManager : MonoBehaviour
         {
             foreach (GameObject spawner in spawnersLenhadores)
             {
-                if (spawner.CompareTag("3° Wave"))
+                if (spawner.CompareTag("3°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -98,7 +99,7 @@ public class WavesManager : MonoBehaviour
 
             foreach (GameObject spawner in spawnersCacadores)
             {
-                if (spawner.CompareTag("3° Wave"))
+                if (spawner.CompareTag("3°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -114,7 +115,7 @@ public class WavesManager : MonoBehaviour
         {
             foreach (GameObject spawner in spawnersLenhadores)
             {
-                if (spawner.CompareTag("4° Wave"))
+                if (spawner.CompareTag("4°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
@@ -126,7 +127,7 @@ public class WavesManager : MonoBehaviour
 
             foreach (GameObject spawner in spawnersCacadores)
             {
-                if (spawner.CompareTag("4° Wave"))
+                if (spawner.CompareTag("4°Wave"))
                 {
                     spawner.GetComponent<Spawner>().Spawn();
                 }
