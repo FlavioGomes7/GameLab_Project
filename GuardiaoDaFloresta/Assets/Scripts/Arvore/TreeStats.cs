@@ -26,9 +26,10 @@ public class TreeStats : MonoBehaviour
     void Update()
     {
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+           Destroy(gameObject);
+            
         }
     }
 }
