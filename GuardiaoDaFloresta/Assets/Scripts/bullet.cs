@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    void OnCollisionEnter(Collision collision)
+    public int bulletDamage;
+
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("hey");
-            Destroy(collision.gameObject);
+            PlayerStats stats = collision.GetComponent<PlayerStats>();
+            {
+                if (stats != null)
+                {
+                    stats.MakeDammage(bulletDamage);
+                    Destroy(this.gameObject);
+                }
+            }
         }
     }
+
+    
+
+
 }
