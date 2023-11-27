@@ -88,7 +88,7 @@ public class EnemyManager : MonoBehaviour
         {
             if (!fovAumentado) 
             {
-                fov += 3;
+                fov += 5;
                 shortFov += 1;
                 fovAumentado = true;
             }
@@ -97,7 +97,7 @@ public class EnemyManager : MonoBehaviour
         {
             if (fovAumentado) 
             {
-                fov -= 3; 
+                fov -= 5; 
                 shortFov -= 1; 
                 fovAumentado = false; 
             }
@@ -125,7 +125,7 @@ public class EnemyManager : MonoBehaviour
                 if(playerInFOV)
                 {
                     alertLevel++;
-                    if(alertLevel >= 200)
+                    if(alertLevel >= 150)
                     {
                         alertStage = AlertStage.Matar;
                         
@@ -150,7 +150,7 @@ public class EnemyManager : MonoBehaviour
                 } 
                 break;
                 case AlertStage.Caca:
-                alertLevel = 199;
+                alertLevel = 149;
                 cacaTimer -= Time.deltaTime; 
                 if (cacaTimer <= 0)
                 {

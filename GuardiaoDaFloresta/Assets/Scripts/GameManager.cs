@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using JetBrains.Annotations;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,21 +9,25 @@ public class GameManager : MonoBehaviour
     public string enemyTag = "Enemy"; 
     public TextMeshProUGUI enemyCountText; 
     public string treeTag = "tree";
-    public TextMeshProUGUI treeCountText; 
-
+    public TextMeshProUGUI treeCountText;
+    
     private float timer = 0f;
     private int objectCount = 0;
+    public GameObject winCanvas;
+    public GameObject loseCanvas;
 
     void Update()
     {
-        
+
         timer += Time.deltaTime;
         UpdateTimeText();
 
-        
+
         CountObjectsWithTag();
 
-       
+        
+
+
     }
 
     void UpdateTimeText()
@@ -41,5 +47,14 @@ public class GameManager : MonoBehaviour
         GameObject[] treesWithTag = GameObject.FindGameObjectsWithTag("Tree");
         objectCount = treesWithTag.Length;
         treeCountText.text = "Árvores: " + objectCount.ToString();
+
+
+        if (treesWithTag.Length <= 0)
+        {
+            Time.timeScale = 0;
+            loseCanvas.SetActive(true);
+        }
+
+
     }
 }
