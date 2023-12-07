@@ -183,7 +183,7 @@ public class Cacador : MonoBehaviour
 
         // anim de dano
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
