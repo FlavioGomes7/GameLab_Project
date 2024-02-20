@@ -15,22 +15,24 @@ public class EnemyIndicator : MonoBehaviour
     private void Start()
     {
        
-        enemyManager = FindAnyObjectByType<EnemyManager>();
     }
 
     private void Update()
     {
         GameObject[] setas = GameObject.FindGameObjectsWithTag("Cacador"); 
 
-        if (enemyManager.alertStage == AlertStage.Curioso || enemyManager.alertStage == AlertStage.Matar)
-        {
-
-            
+          
             foreach (GameObject seta in setas)
             {
+               enemyManager = seta.GetComponent<EnemyManager>();
+            if (enemyManager.alertStage == AlertStage.Curioso | enemyManager.alertStage == AlertStage.Matar)
+            {
+
+
                 float distancia = Vector3.Distance(player.transform.position, seta.transform.position);
                 if (distancia < ativacaoDistancia)
                 {
+                    Debug.Log("morra");
                     if (!enemyIndicators.ContainsKey(seta))
                     {
                         GameObject newIndicador = Instantiate(setaPrefab, Vector3.zero, Quaternion.identity);
@@ -57,10 +59,12 @@ public class EnemyIndicator : MonoBehaviour
                     GameObject indicatorDeDestruicao = enemyIndicators[seta];
                     enemyIndicators.Remove(seta);
                     Destroy(indicatorDeDestruicao);
+
                 }
             }
+            }
 
-        }
+        
 
         List<GameObject> keysToRemove = new List<GameObject>();
         foreach(var pair in enemyIndicators)
