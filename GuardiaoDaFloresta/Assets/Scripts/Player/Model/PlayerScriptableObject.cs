@@ -5,6 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Playerstats", menuName = "ScriptableObjects/PlayerStats")]
 public class PlayerScriptableObject : ScriptableObject
 {
+
+    public class StatInfo
+    {
+        public PlayerScriptableObject statType;
+        public float statValue;
+    }
+    
+    [SerializeField] private List<StatInfo> statInfo = new List<StatInfo>();
+
+    public float GetStat(PlayerScriptableObject stat)
+    {
+        foreach (var s in statInfo)
+        {
+            if (s.statType == stat)
+            return s.statValue;
+        }
+
+        Debug.LogError($"Valor do stat de {stat} no {this.name} não encontrado");
+        return 0;
+    }
+
     [SerializeField] private float hpMax;
     [SerializeField] private float damageMax;
     [SerializeField] private float rangeMax;

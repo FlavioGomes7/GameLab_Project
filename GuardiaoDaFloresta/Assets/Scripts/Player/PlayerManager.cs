@@ -20,35 +20,37 @@ public class PlayerManager : MonoBehaviour
     private float speedRateCurrent;
     private int pointsCurrent;
 
+    //UI
+    public HealthBar healthBar;
+
+    //Respawns
+    public Transform[] respawns;
+    public int length;
+
+
     //SO
     [SerializeField] private PlayerScriptableObject playerStats;
 
-    //Método para danificar inimigo
-    public float DealDamage(float enemyHp)
-    {
-        enemyHp -= damageCurrent;
-        return enemyHp;
-    }
 
-    //Método para receber dano e verificar se está vivo ou morto
-    public void TakeDamage(/*float damage*/)
+    //Mï¿½todo para receber dano e verificar se estï¿½ vivo ou morto
+    public void TakeDamage(float damage)
     {
         
         if (hpCurrent > 0)
         {
-            //hpCurrent -= damage;
+            hpCurrent = hpCurrent - damage;
+            healthBar.SetCurrentHealth(hpCurrent);
         }
         else
         {
             Death();
         }
     }
-    //Método para excutar a morte
+    //Mï¿½todo para excutar a morte
     public void Death()
     {
-        
-        Debug.Log("Morreu");
-      
+        transform.position = respawns[Random.Range(0, length)].position;
+        hpCurrent = hpMax;
     }
 
     void Start()
@@ -68,16 +70,30 @@ public class PlayerManager : MonoBehaviour
         speedCurrent = speedMax;
         speedRateCurrent = speedRateMax;
         pointsCurrent = pointsInitMax;
+
+        //Settings UI
+        healthBar.SetMaxHealth(hpMax);
+
+        //Set Respawns
+        length = respawns.Length;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-       
-        if(other.CompareTag("Enemy"))
+        Lenhador lenhadorComponent = other.GetComponent<Lenhador>();
+        Cacador cacadorComponent = other.GetComponent<Cacador>();
+
+        if (lenhadorComponent != null)
         {
-            DealDamage(other.GetComponent<Lenhador>().currentHealth);
+            lenhadorComponent.TakeDamage(damageCurrent);
         }
+        if (cacadorComponent != null)
+        {
+            cacadorComponent.TakeDamage(damageCurrent);
+        }
+    
 
     }
+    
 
 }

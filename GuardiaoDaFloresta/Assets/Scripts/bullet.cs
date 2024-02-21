@@ -10,11 +10,11 @@ public class bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerStats stats = collision.GetComponent<PlayerStats>();
+            PlayerManager hp = collision.GetComponent<PlayerManager>();
             {
-                if (stats != null)
+                if (hp != null)
                 {
-                    stats.MakeDammage(bulletDamage);
+                    hp.TakeDamage(bulletDamage);
                     Destroy(this.gameObject);
                 }
             }
