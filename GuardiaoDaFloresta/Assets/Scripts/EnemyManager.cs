@@ -18,7 +18,8 @@ public class EnemyManager : MonoBehaviour
     Cacador cacador;
     private bool fovAumentado;
     public float cacaDuration = 20; 
-    public float cacaTimer; 
+    public float cacaTimer;
+    public GameObject detectionReference;
 
     public float fov;
     [Range(0, 360)] public float fovAngle;
@@ -40,7 +41,8 @@ public class EnemyManager : MonoBehaviour
     {
         cacador = GetComponent<Cacador>();
         fovAumentado = false;
-        
+        detectionReference.SetActive(false);
+
     }
 
     private void Awake()
@@ -115,10 +117,12 @@ public class EnemyManager : MonoBehaviour
         switch(alertStage)
         {
                 case AlertStage.Paz:
+                detectionReference.SetActive(false);
                 if (playerInFOV)
                 {
                     alertStage = AlertStage.Curioso;
-                   
+                    detectionReference.SetActive(true);
+
                 }
                 break;
                 case AlertStage.Curioso:
@@ -128,7 +132,7 @@ public class EnemyManager : MonoBehaviour
                     if(alertLevel >= 150)
                     {
                         alertStage = AlertStage.Matar;
-                        
+                        detectionReference.SetActive(false);
                     }
                         
                 }
@@ -150,6 +154,7 @@ public class EnemyManager : MonoBehaviour
                 } 
                 break;
                 case AlertStage.Caca:
+                 detectionReference.SetActive(false);
                 alertLevel = 149;
                 cacaTimer -= Time.deltaTime; 
                 if (cacaTimer <= 0)
