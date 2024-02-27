@@ -53,7 +53,7 @@ public class EnemyIndicator : MonoBehaviour
                     {
                         indicador.GetComponent<Renderer>().enabled = true;
                     }
-                }
+            }   }
                 else if (enemyIndicators.ContainsKey(seta))
                 {
                     GameObject indicatorDeDestruicao = enemyIndicators[seta];
@@ -61,7 +61,7 @@ public class EnemyIndicator : MonoBehaviour
                     Destroy(indicatorDeDestruicao);
 
                 }
-            }
+            
             }
 
         

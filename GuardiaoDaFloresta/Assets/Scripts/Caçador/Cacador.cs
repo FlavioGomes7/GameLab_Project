@@ -28,6 +28,7 @@ public class Cacador : MonoBehaviour
     public Transform aim;
     public GameObject waypoint;
     private float speed = 10;
+    
 
 
 
@@ -50,6 +51,8 @@ public class Cacador : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentHealth = cacadorMaxHealth;
         SetMaxHealth(cacadorMaxHealth);
+        bulletTime = timer;
+        
 
     }
 
@@ -71,9 +74,10 @@ public class Cacador : MonoBehaviour
             }
             if (enemyManager.alertStage == AlertStage.Matar)
             {
+                atirando = true;
                 ShootPlayer();
                 Moving();
-                atirando = true;
+                
 
             }
             else
@@ -112,7 +116,7 @@ public class Cacador : MonoBehaviour
                 cacador.angularSpeed = minAngularSpeed;
                 cacador.acceleration = minAcelerationSpeed;
             }
-            if (enemyManager.shortAlertLevel == 50)
+            if (enemyManager.shortAlertLevel == 20)
             {
                 Moving();
             }
@@ -136,6 +140,7 @@ public class Cacador : MonoBehaviour
 
     private void ShootPlayer()
     {
+        
         bulletTime -= Time.deltaTime;
         if (bulletTime > 0) return;
         bulletTime = timer;
@@ -145,7 +150,7 @@ public class Cacador : MonoBehaviour
         Destroy(bulletObj, 2f);
     }
 
-    private void Moving()
+    public void Moving()
     {
 
         cacador.SetDestination(player.position);

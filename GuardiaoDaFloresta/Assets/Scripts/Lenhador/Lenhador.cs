@@ -13,6 +13,7 @@ public class Lenhador : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     public float animationDistanceThreshold;
+    Cacador sos;
 
     //Enemy stats
     [SerializeField] private int maxHealth;
@@ -34,8 +35,8 @@ public class Lenhador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         
+
         if (target == null)
         {
             agent.isStopped = true;
@@ -79,6 +80,20 @@ public class Lenhador : MonoBehaviour
     {
         currentHealth -= damage;
         SetCurrentHealth(currentHealth);
+        GameObject[] helpers = GameObject.FindGameObjectsWithTag("Cacador");
+        foreach (GameObject helper in helpers)
+        {
+            sos = helper.GetComponent<Cacador>();
+            if (sos != null)
+            {
+                sos.Moving();
+            }
+            else
+            {
+                
+            }
+        }
+
 
         // anim de dano
 
