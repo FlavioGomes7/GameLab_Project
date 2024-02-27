@@ -12,11 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e72454b38d43bf4d8ee2bc87d29ac6e, type: 3}
   m_Name: Playerstats
   m_EditorClassIdentifier: 
-  hpMax: 10
-  damageMax: 2
-  rangeMax: 1
-  speedMax: 2
-  speedRateMax: 2
-  dashRedCooldown: 2
-  pointsInitMax: 2
-  dashNumberMax: 2
+  statList:
+  - statType: hpMax
+    statValue: 10
+  - statType: damageMax
+    statValue: 2
+  - statType: rangeMax
+    statValue: 1
+  - statType: speedMax
+    statValue: 2
+  - statType: attackSpeedMax
+    statValue: 2
+  - statType: dashRedCooldown
+    statValue: 2
+  - statType: pointsInitMax
+    statValue: 2
+  - statType: dashNumberMax
+    statValue: 2
+  moneyPlayer: 500

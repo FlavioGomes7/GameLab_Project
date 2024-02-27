@@ -10,15 +10,15 @@ public class PlayerManager : MonoBehaviour
     private float speedMax;
     private float speedRateMax;
     private float dashRedCooldown;
-    private int pointsInitMax;
-    private int dashNumberMax;
+    private float pointsInitMax;
+    private float dashNumberMax;
 
     //In-game stats
     private float hpCurrent;
     private float damageCurrent;
     private float speedCurrent;
     private float speedRateCurrent;
-    private int pointsCurrent;
+    private float pointsCurrent;
 
     //UI
     public HealthBar healthBar;
