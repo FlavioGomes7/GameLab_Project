@@ -7,6 +7,14 @@ using UnityEngine;
 
 public class PlayerScriptableObject : ScriptableObject
 {
+    [SerializeField] private float HpBase;
+    [SerializeField] private float damageBase;
+    [SerializeField] private float rangeBase;
+    [SerializeField] private float speedBase;
+    [SerializeField] private float speedRateBase;
+    [SerializeField] private float dashRedBase;
+    [SerializeField] private float dashNumberbase;
+   
 
     [Serializable]
     public class StatInfo
@@ -36,15 +44,22 @@ public class PlayerScriptableObject : ScriptableObject
         statList[index].statValue += amount;
     }
 
-    public float HpMax => statList[0].statValue;
-    public float DamageMax => statList[0].statValue;
-    public float RangeMax => statList[0].statValue;
-    public float SpeedMax => statList[0].statValue;
-    public float SpeedRateMax => statList[0].statValue;
-    public float DashRedCooldown => statList[0].statValue;
-    public float PointInitMax => statList[0].statValue;
-    public float DashNumberMax => statList[0].statValue;
+    public void ResetStatus()
+    {
+        foreach (var s in statList)
+        {
+            s.statValue = 0;
+        }
+    }
 
+    public float HpMax => statList[0].statValue + HpBase;
+    public float DamageMax => statList[1].statValue + damageBase;
+    public float RangeMax => statList[2].statValue + rangeBase;
+    public float SpeedMax => statList[3].statValue + speedBase;
+    public float SpeedRateMax => statList[4].statValue + speedRateBase;
+    public float DashRedCooldown => statList[5].statValue + dashRedBase;
+    public float PointInitMax => statList[6].statValue;
+    public float DashNumberMax => statList[7].statValue + dashNumberbase;
     public float moneyPlayer;
 
     

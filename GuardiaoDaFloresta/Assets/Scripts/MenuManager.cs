@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] menus;
+    [SerializeField] private PlayerScriptableObject scriptableObject;
+
+    private void Start()
+    {
+        scriptableObject.ResetStatus();
+    }
 
     public void GoToTitleMenu()
     {
