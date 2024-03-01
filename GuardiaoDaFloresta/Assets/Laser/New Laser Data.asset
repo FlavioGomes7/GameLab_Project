@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Laser Data
   m_EditorClassIdentifier: 
   m_laserSparks: {fileID: 0}
-  m_laserMaterial: {fileID: 2100000, guid: 33398c1da1c950e418147f243c52554f, type: 2}
+  m_laserMaterial: {fileID: 2100000, guid: 5709059d714f6b94d9cc26b939613c80, type: 2}
   m_properties:
     m_layerMask:
       serializedVersion: 2

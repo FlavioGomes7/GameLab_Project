@@ -52,6 +52,7 @@ public class Cacador : MonoBehaviour
         currentHealth = cacadorMaxHealth;
         SetMaxHealth(cacadorMaxHealth);
         bulletTime = timer;
+        Lenhador.onTakeDamage += Moving;
         
 
     }
@@ -82,6 +83,7 @@ public class Cacador : MonoBehaviour
             }
             else
             {
+                bulletTime = timer;
                 atirando = false;
                 if (cacador.remainingDistance <= cacador.stoppingDistance)
                 {

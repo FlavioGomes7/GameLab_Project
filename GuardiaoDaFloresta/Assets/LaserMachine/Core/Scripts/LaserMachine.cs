@@ -42,8 +42,8 @@ public class LaserMachine : MonoBehaviour {
 
 
         public EnemyManager enemyManager;
+        
 
-       
 
 
 
