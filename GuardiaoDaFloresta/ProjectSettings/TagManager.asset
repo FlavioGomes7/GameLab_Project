@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Obstacle
   - Cacador
+  - Main Menu
   layers:
   - Default
   - TransparentFX
