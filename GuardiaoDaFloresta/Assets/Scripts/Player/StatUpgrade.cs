@@ -18,7 +18,7 @@ public class StatUpgrade : UpgradeData
                 {
                     statPlayer.moneyPlayer -= upgradeDatas[i].costUpgrade;
                     upgradeDatas[i].upgradesMadeIt++;
-                    statPlayer.ChangeStat(upgradeDatas[i].upgradeAmount, i);
+                    stat.statValue += upgradeDatas[i].upgradeAmount;
                     return;
                 }
                 else if (stat.statType == upgradeDatas[i].statToUpgrade && statPlayer.moneyPlayer < upgradeDatas[i].costUpgrade)

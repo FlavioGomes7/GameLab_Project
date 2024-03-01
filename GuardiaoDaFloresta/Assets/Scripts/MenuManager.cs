@@ -41,6 +41,25 @@ public class MenuManager : MonoBehaviour
         menus[2].SetActive(true);
     }
 
+    public void GoToShop()
+    {
+        foreach (GameObject ob in menus)
+        {
+            ob.SetActive(false);
+        }
+        menus[3].SetActive(true);
+    }
+
+    public void OpenLevel(int index)
+    {
+        GameObject mainMenu;
+        mainMenu = GameObject.FindGameObjectWithTag("Main Menu");
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(mainMenu);
+        mainMenu.SetActive(false);
+        SceneManager.LoadScene(index);
+    }
+
     public void Quit()
     {
         Debug.Log("Saiu");

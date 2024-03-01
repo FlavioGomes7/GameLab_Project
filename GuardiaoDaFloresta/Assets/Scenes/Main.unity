@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1070,7 +1070,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1946066186}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToTitleMenu
+        m_MethodName: GoToLevelSelector
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3114,7 +3114,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 842860802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1946066186}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: OpenLevel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &842860802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3393,7 +3405,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1946066186}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: GoToTitleMenu
+        m_MethodName: GoToShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3456,7 +3468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &883318194
 Transform:
   m_ObjectHideFlags: 0
@@ -3560,7 +3572,7 @@ GameObject:
   - component: {fileID: 957607115}
   m_Layer: 0
   m_Name: Main Menu
-  m_TagString: Untagged
+  m_TagString: Main Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4008,7 +4020,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1119227828}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1946066186}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: OpenLevel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1119227828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,7 +4086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1184427065
 Transform:
   m_ObjectHideFlags: 0
@@ -5450,6 +5474,7 @@ MonoBehaviour:
   - {fileID: 883318193}
   - {fileID: 1554585795}
   - {fileID: 1922889201}
+  - {fileID: 1184427064}
   scriptableObject: {fileID: 11400000, guid: 7786a61e6271cf541bcdd0d90598de6d, type: 2}
 --- !u!4 &1946066187
 Transform:
@@ -5548,7 +5573,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1981761456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1946066186}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: OpenLevel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1981761456
 MonoBehaviour:
   m_ObjectHideFlags: 0
