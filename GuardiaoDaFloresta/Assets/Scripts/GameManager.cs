@@ -48,6 +48,11 @@ public class GameManager : MonoBehaviour
         objectCount = treesWithTag.Length;
         treeCountText.text = "Árvores: " + objectCount.ToString();
 
+        if (enemiesWithTag.Length <= 0)
+        {
+            Time.timeScale = 0;
+            winCanvas.SetActive(true);
+        }
 
         if (treesWithTag.Length <= 0)
         {
