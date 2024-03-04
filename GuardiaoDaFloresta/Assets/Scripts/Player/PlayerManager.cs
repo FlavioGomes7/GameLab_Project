@@ -35,22 +35,21 @@ public class PlayerManager : MonoBehaviour
     //M�todo para receber dano e verificar se est� vivo ou morto
     public void TakeDamage(float damage)
     {
-        
-        if (hpCurrent > 0)
+        hpCurrent = hpCurrent - damage;
+        healthBar.SetCurrentHealth(hpCurrent);
+        if (hpCurrent <= 0)
         {
-            hpCurrent = hpCurrent - damage;
-            healthBar.SetCurrentHealth(hpCurrent);
-        }
-        else
-        {
+           
             Death();
         }
+       
     }
     //M�todo para excutar a morte
     public void Death()
     {
         transform.position = respawns[Random.Range(0, length)].position;
         hpCurrent = hpMax;
+        healthBar.SetCurrentHealth(hpMax);
     }
 
     void Start()
