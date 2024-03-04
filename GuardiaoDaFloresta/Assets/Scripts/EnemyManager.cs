@@ -13,6 +13,7 @@ public enum AlertStage
 
 }
 
+
 public class EnemyManager : MonoBehaviour
 {
     Cacador cacador;
@@ -29,10 +30,10 @@ public class EnemyManager : MonoBehaviour
 
 
     public AlertStage alertStage;
-    [SerializeField][Range(0, 200)] public float alertLevel;
+    [SerializeField][Range(0, 2)] public float alertLevel;
 
     public AlertStage shortAlertStage;
-    [Range(0, 20)] public float shortAlertLevel;
+    [Range(0, 3)] public float shortAlertLevel;
 
 
 
@@ -127,8 +128,8 @@ public class EnemyManager : MonoBehaviour
             case AlertStage.Curioso:
                 if (playerInFOV)
                 {
-                    alertLevel++;
-                    if (alertLevel >= 200)
+                    alertLevel += Time.deltaTime * 1;
+                    if (alertLevel >= 2)
                     {
                         alertStage = AlertStage.Matar;
                         detectionReference.SetActive(false);
@@ -137,7 +138,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 else
                 {
-                    alertLevel--;
+                    alertLevel -= Time.deltaTime * 1;
                     if (alertLevel <= 0)
                     {
                         alertStage = AlertStage.Paz;
@@ -149,7 +150,7 @@ public class EnemyManager : MonoBehaviour
                 if (!playerInFOV)
                 {
                     alertStage = AlertStage.Caca;
-                    alertLevel = 150;
+                    alertLevel = 1.5f;
                 }
                 break;
             case AlertStage.Caca:
@@ -163,9 +164,9 @@ public class EnemyManager : MonoBehaviour
                 }
                 if (playerInFOV)
                 {
-                    alertLevel++;
+                    alertLevel += Time.deltaTime * 1;
                     detectionReference.SetActive(true);
-                    if (alertLevel >= 200)
+                    if (alertLevel >= 2)
                     {
                         alertStage = AlertStage.Matar;
                         detectionReference.SetActive(false);
@@ -182,21 +183,24 @@ public class EnemyManager : MonoBehaviour
             case AlertStage.Paz:
                 if (playerInShortFOV)
                 {
-                    shortAlertLevel++;
-                    if(shortAlertLevel >= 20)
+                    shortAlertLevel += Time.deltaTime * 1;
+                    if(shortAlertLevel >= 0)
                     {
                         shortAlertStage = AlertStage.Curioso;
+                        
                     }
                     
                 }
                 break;
             case AlertStage.Curioso:
+                detectionReference.SetActive(true);
                 if (!playerInShortFOV)
                 {
-                    shortAlertLevel--;
-                    if(shortAlertLevel <= 20)
+                    shortAlertLevel -= Time.deltaTime * 1;
+                    if(shortAlertLevel <= 0)
                     {
                         shortAlertStage = AlertStage.Paz;
+                        
                     }
                 }
                 break;

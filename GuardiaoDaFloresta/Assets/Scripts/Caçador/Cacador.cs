@@ -118,7 +118,7 @@ public class Cacador : MonoBehaviour
                 cacador.angularSpeed = minAngularSpeed;
                 cacador.acceleration = minAcelerationSpeed;
             }
-            if (enemyManager.shortAlertLevel == 20)
+            if (enemyManager.shortAlertStage == AlertStage.Curioso)
             {
                 Moving();
             }
