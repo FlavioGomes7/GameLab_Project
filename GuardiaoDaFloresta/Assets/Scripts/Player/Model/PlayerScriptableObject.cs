@@ -1,26 +1,67 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Playerstats", menuName = "ScriptableObjects/PlayerStats")]
+
 public class PlayerScriptableObject : ScriptableObject
 {
-    [SerializeField] private float hpMax;
-    [SerializeField] private float damageMax;
-    [SerializeField] private float rangeMax;
-    [SerializeField] private float speedMax;
-    [SerializeField] private float speedRateMax;
-    [SerializeField] private float dashRedCooldown;
-    [SerializeField] private int pointsInitMax;
-    [SerializeField] private int dashNumberMax;
+    [SerializeField] private float HpBase;
+    [SerializeField] private float damageBase;
+    [SerializeField] private float rangeBase;
+    [SerializeField] private float speedBase;
+    [SerializeField] private float speedRateBase;
+    [SerializeField] private float dashRedBase;
+    [SerializeField] private float dashNumberbase;
+   
 
+    [Serializable]
+    public class StatInfo
+    {
+        public string statType;
+        public float statValue;
+    }
 
-    public float HpMax => hpMax;
-    public float DamageMax => damageMax;
-    public float RangeMax => rangeMax;
-    public float SpeedMax => speedMax;
-    public float SpeedRateMax => speedRateMax;
-    public float DashRedCooldown => dashRedCooldown;
-    public int PointInitMax => pointsInitMax;
-    public int DashNumberMax => dashNumberMax;
+    [SerializeField] public List<StatInfo> statList = new List<StatInfo>();
+
+    public float GetStat(string status)
+    {
+        foreach(var s in statList)
+        {
+            if(s.statType == status)
+            {
+                return s.statValue;
+            }
+        }
+
+        Debug.LogError("");
+        return 0;
+    }
+
+    public void ChangeStat(float amount, int index)
+    {
+        statList[index].statValue += amount;
+    }
+
+    public void ResetStatus()
+    {
+        foreach (var s in statList)
+        {
+            s.statValue = 0;
+        }
+    }
+
+    public float HpMax => statList[0].statValue + HpBase;
+    public float DamageMax => statList[1].statValue + damageBase;
+    public float RangeMax => statList[2].statValue + rangeBase;
+    public float SpeedMax => statList[3].statValue + speedBase;
+    public float SpeedRateMax => statList[4].statValue + speedRateBase;
+    public float DashRedCooldown => statList[5].statValue + dashRedBase;
+    public float PointInitMax => statList[6].statValue;
+    public float DashNumberMax => statList[7].statValue + dashNumberbase;
+    public float moneyPlayer;
+
+    
+
 }
