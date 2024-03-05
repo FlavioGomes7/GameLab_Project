@@ -49,8 +49,10 @@ public class Lenhador : MonoBehaviour
             return;
         }
 
-        agent.SetDestination(target.position);
-
+        if(agent != null)
+        {
+            agent.SetDestination(target.position);
+        }
 
 
         if (agent.velocity.magnitude > 0)
@@ -89,6 +91,7 @@ public class Lenhador : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            GameManager.instance.AddMoney(100f);
         }
 
     }

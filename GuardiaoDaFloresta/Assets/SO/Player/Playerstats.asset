@@ -36,4 +36,4 @@ MonoBehaviour:
     statValue: 0
   - statType: dashNumberMax
     statValue: 0
-  moneyPlayer: 999
+  moneyPlayer: 0
