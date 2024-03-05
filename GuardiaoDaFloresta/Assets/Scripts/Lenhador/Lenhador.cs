@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -13,6 +14,10 @@ public class Lenhador : MonoBehaviour
     private NavMeshAgent agent;
     private Animator anim;
     public float animationDistanceThreshold;
+    //Cacador sos;
+    public delegate void damage();
+    public static event damage onTakeDamage;
+
 
     //Enemy stats
     [SerializeField] private int maxHealth;
@@ -34,8 +39,8 @@ public class Lenhador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         
+
         if (target == null)
         {
             agent.isStopped = true;
@@ -72,6 +77,7 @@ public class Lenhador : MonoBehaviour
 
         }
 
+      
        
     }
 
@@ -79,10 +85,8 @@ public class Lenhador : MonoBehaviour
     {
         currentHealth -= damage;
         SetCurrentHealth(currentHealth);
-
-        // anim de dano
-
-        if (currentHealth < 0)
+        onTakeDamage();
+        if (currentHealth <= 0)
         {
             Die();
         }

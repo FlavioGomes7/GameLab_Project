@@ -13,12 +13,14 @@ public enum AlertStage
 
 }
 
+
 public class EnemyManager : MonoBehaviour
 {
     Cacador cacador;
     private bool fovAumentado;
     public float cacaDuration = 20; 
-    public float cacaTimer; 
+    public float cacaTimer;
+    public GameObject detectionReference;
 
     public float fov;
     [Range(0, 360)] public float fovAngle;
@@ -28,10 +30,10 @@ public class EnemyManager : MonoBehaviour
 
 
     public AlertStage alertStage;
-    [Range(0, 200)] public float alertLevel;
+    [SerializeField][Range(0, 2)] public float alertLevel;
 
     public AlertStage shortAlertStage;
-    [Range(0, 50)] public float shortAlertLevel;
+    [Range(0, 3)] public float shortAlertLevel;
 
 
 
@@ -40,7 +42,8 @@ public class EnemyManager : MonoBehaviour
     {
         cacador = GetComponent<Cacador>();
         fovAumentado = false;
-        
+        detectionReference.SetActive(false);
+
     }
 
     private void Awake()
@@ -112,62 +115,64 @@ public class EnemyManager : MonoBehaviour
 
     private void UpdateAlertStage(bool playerInFOV)
     {
-        switch(alertStage)
+        switch (alertStage)
         {
-                case AlertStage.Paz:
+            case AlertStage.Paz:
+                detectionReference.SetActive(false);
                 if (playerInFOV)
                 {
                     alertStage = AlertStage.Curioso;
-                   
+                    detectionReference.SetActive(true);
                 }
                 break;
-                case AlertStage.Curioso:
-                if(playerInFOV)
+            case AlertStage.Curioso:
+                if (playerInFOV)
                 {
-                    alertLevel++;
-                    if(alertLevel >= 150)
+                    alertLevel += Time.deltaTime * 1;
+                    if (alertLevel >= 2)
                     {
                         alertStage = AlertStage.Matar;
-                        
+                        detectionReference.SetActive(false);
                     }
-                        
+
                 }
                 else
                 {
-                    alertLevel--;
+                    alertLevel -= Time.deltaTime * 1;
                     if (alertLevel <= 0)
                     {
                         alertStage = AlertStage.Paz;
                     }
-                        
                 }
                 break;
-                case AlertStage.Matar:
+            case AlertStage.Matar:
                 cacaTimer = 20;
                 if (!playerInFOV)
                 {
                     alertStage = AlertStage.Caca;
-                } 
+                    alertLevel = 1.5f;
+                }
                 break;
-                case AlertStage.Caca:
-                alertLevel = 149;
-                cacaTimer -= Time.deltaTime; 
+            case AlertStage.Caca:
+                detectionReference.SetActive(false);
+                cacaTimer -= Time.deltaTime;
                 if (cacaTimer <= 0)
                 {
-                    
                     alertStage = AlertStage.Paz;
                     alertLevel = 0;
-                    cacaTimer = cacaDuration; 
+                    cacaTimer = cacaDuration;
                 }
                 if (playerInFOV)
                 {
-                    alertStage = AlertStage.Matar;
-                    
-
+                    alertLevel += Time.deltaTime * 1;
+                    detectionReference.SetActive(true);
+                    if (alertLevel >= 2)
+                    {
+                        alertStage = AlertStage.Matar;
+                        detectionReference.SetActive(false);
+                    }
                 }
                 break;
-
-
         }
     }
 
@@ -178,21 +183,24 @@ public class EnemyManager : MonoBehaviour
             case AlertStage.Paz:
                 if (playerInShortFOV)
                 {
-                    shortAlertLevel++;
-                    if(shortAlertLevel >= 50)
+                    shortAlertLevel += Time.deltaTime * 1;
+                    if(shortAlertLevel >= 0)
                     {
                         shortAlertStage = AlertStage.Curioso;
+                        
                     }
                     
                 }
                 break;
             case AlertStage.Curioso:
+                detectionReference.SetActive(true);
                 if (!playerInShortFOV)
                 {
-                    shortAlertLevel--;
-                    if(shortAlertLevel <= 50)
+                    shortAlertLevel -= Time.deltaTime * 1;
+                    if(shortAlertLevel <= 0)
                     {
                         shortAlertStage = AlertStage.Paz;
+                        
                     }
                 }
                 break;
