@@ -18,24 +18,25 @@ public class Cacador : MonoBehaviour
     [SerializeField] private float timer = 5;
     private float velocidadePadrao;
     private float velocidadeRotacaoPadrao;
-    private float bulletTime;
+    public float bulletTime;
     private float maxSpeed = 15f;
     private float maxAngularSpeed = 1000f;
     private float maxAcelerationSpeed = 10f;
-    private float minSpeed = 5f;
+    private float minSpeed = 10f;
     private float minAngularSpeed = 400f;
     private float minAcelerationSpeed = 5f;
     public Transform aim;
     public GameObject waypoint;
     private float speed = 10;
-    
+   
+
 
 
 
     [SerializeField] private int cacadorMaxHealth;
     public float currentHealth;
 
-    //Enemy UI
+ 
     [SerializeField] private Slider cacadorSlider;
 
 
@@ -53,6 +54,7 @@ public class Cacador : MonoBehaviour
         SetMaxHealth(cacadorMaxHealth);
         bulletTime = timer;
         Lenhador.onTakeDamage += Moving;
+
         
 
     }
@@ -145,11 +147,11 @@ public class Cacador : MonoBehaviour
         
         bulletTime -= Time.deltaTime;
         if (bulletTime > 0) return;
-        bulletTime = timer;
         GameObject bulletObj = Instantiate(cacadorBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.AddForce(bulletRig.transform.forward * shootForce);
         Destroy(bulletObj, 2f);
+        bulletTime = timer;
     }
 
     public void Moving()

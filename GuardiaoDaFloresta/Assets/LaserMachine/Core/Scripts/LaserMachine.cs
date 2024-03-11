@@ -42,8 +42,9 @@ public class LaserMachine : MonoBehaviour {
 
 
         public EnemyManager enemyManager;
-        
+        public Cacador cacador;
 
+       
 
 
 
@@ -110,12 +111,20 @@ public class LaserMachine : MonoBehaviour {
 
 
         void Update () 
-    {
+    {     
             
             if (enemyManager.alertStage == AlertStage.Matar)
             {
-                m_active = true;
                 
+                
+                if(cacador.bulletTime >= 1)
+                {
+                    m_active = false;
+                }
+                else
+                {
+                    m_active = true;
+                }
                 
                 
             }
