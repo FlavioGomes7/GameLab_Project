@@ -55,7 +55,6 @@ public class Cacador : MonoBehaviour
         SetMaxHealth(cacadorMaxHealth);
         bulletTime = timer;
         Lenhador.onTakeDamage += Moving;
-
         
 
     }
@@ -184,7 +183,8 @@ public class Cacador : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            CacadorDie();
+            Die();
+            GameManager.instance.AddMoney(100f);
         }
 
     }

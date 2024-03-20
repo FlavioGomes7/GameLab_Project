@@ -12,9 +12,17 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI treeCountText;
     
     private float timer = 0f;
-    private int objectCount = 0;
+    private int enemyCount = 0;
     public GameObject winCanvas;
     public GameObject loseCanvas;
+
+    [SerializeField] private PlayerScriptableObject stats;
+    public static GameManager instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     void Update()
     {
@@ -42,17 +50,12 @@ public class GameManager : MonoBehaviour
     {
         
         GameObject[] enemiesWithTag = GameObject.FindGameObjectsWithTag("Enemy");
-        objectCount = enemiesWithTag.Length;
-        enemyCountText.text = "Inimigos: " + objectCount.ToString();
+        enemyCount = enemiesWithTag.Length;
+        enemyCountText.text = "Inimigos: " + enemyCount.ToString();
         GameObject[] treesWithTag = GameObject.FindGameObjectsWithTag("Tree");
-        objectCount = treesWithTag.Length;
-        treeCountText.text = "Árvores: " + objectCount.ToString();
+        enemyCount = treesWithTag.Length;
+        treeCountText.text = "Árvores: " + enemyCount.ToString();
 
-        if (enemiesWithTag.Length <= 0)
-        {
-            Time.timeScale = 0;
-            winCanvas.SetActive(true);
-        }
 
         if (treesWithTag.Length <= 0)
         {
@@ -60,6 +63,16 @@ public class GameManager : MonoBehaviour
             loseCanvas.SetActive(true);
         }
 
-
     }
+
+    public void WinLevel()
+    {
+        Time.timeScale = 0;
+        winCanvas.SetActive(true);
+    }
+
+   public void AddMoney(float value)
+   {
+        stats.moneyPlayer += value;
+   }
 }

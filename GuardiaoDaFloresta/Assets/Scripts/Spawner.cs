@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform enemy;
+        public GameObject enemy;
         public int count;
         public float rate;
         //public GameObject[] enemies;
@@ -134,9 +134,9 @@ public class Spawner : MonoBehaviour
         //}
     }
 
-    private void SpawnEnemy(Transform _enemy)
+    private void SpawnEnemy(GameObject _enemy)
     {
-        Instantiate(_enemy, transform.position, transform.rotation);
+        Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
         Debug.Log("Spawning Enemy: " + _enemy.name);
     }
 
