@@ -21,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     public float cacaDuration = 20; 
     public float cacaTimer;
     public GameObject detectionReference;
+    public bool playerInFOV;
 
     public float fov;
     [Range(0, 360)] public float fovAngle;

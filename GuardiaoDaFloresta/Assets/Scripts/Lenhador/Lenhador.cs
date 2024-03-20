@@ -85,18 +85,18 @@ public class Lenhador : MonoBehaviour
     {
         currentHealth -= damage;
         SetCurrentHealth(currentHealth);
-        onTakeDamage();
         if (currentHealth <= 0)
         {
-            Die();
+            LenhadorDie();
         }
-
+        onTakeDamage();
     }
 
-    void Die()
+    private void LenhadorDie()
     {
         //anim de morte
         Destroy(gameObject);
+        Debug.Log("morri");
     }
 
     public void SetMaxHealth(int maxHealth)

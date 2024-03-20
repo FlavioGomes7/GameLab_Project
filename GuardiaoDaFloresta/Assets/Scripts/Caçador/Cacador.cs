@@ -18,24 +18,26 @@ public class Cacador : MonoBehaviour
     [SerializeField] private float timer = 5;
     private float velocidadePadrao;
     private float velocidadeRotacaoPadrao;
-    private float bulletTime;
+    public float bulletTime;
     private float maxSpeed = 15f;
     private float maxAngularSpeed = 1000f;
     private float maxAcelerationSpeed = 10f;
-    private float minSpeed = 5f;
+    private float minSpeed = 10f;
     private float minAngularSpeed = 400f;
     private float minAcelerationSpeed = 5f;
     public Transform aim;
     public GameObject waypoint;
     private float speed = 10;
-    
+    public float aimSpeed;
+   
+
 
 
 
     [SerializeField] private int cacadorMaxHealth;
     public float currentHealth;
 
-    //Enemy UI
+ 
     [SerializeField] private Slider cacadorSlider;
 
 
@@ -53,6 +55,7 @@ public class Cacador : MonoBehaviour
         SetMaxHealth(cacadorMaxHealth);
         bulletTime = timer;
         Lenhador.onTakeDamage += Moving;
+
         
 
     }
@@ -69,7 +72,7 @@ public class Cacador : MonoBehaviour
 
 
 
-            if (enemyManager.alertStage == AlertStage.Curioso)
+            if (enemyManager.alertStage == AlertStage.Curioso || enemyManager.shortAlertStage == AlertStage.Curioso)
             {
                 Moving();
             }
@@ -118,22 +121,8 @@ public class Cacador : MonoBehaviour
                 cacador.angularSpeed = minAngularSpeed;
                 cacador.acceleration = minAcelerationSpeed;
             }
-            if (enemyManager.shortAlertStage == AlertStage.Curioso)
-            {
-                Moving();
-            }
-            else
-            {
-                if (cacador.remainingDistance <= cacador.stoppingDistance)
-                {
-                    Vector3 point;
-                    if (RandomPoint(centrePoint.position, range, out point))
-                    {
-                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-                        cacador.SetDestination(point);
-                    }
-                }
-            }
+            
+           
 
         }
 
@@ -145,22 +134,25 @@ public class Cacador : MonoBehaviour
         
         bulletTime -= Time.deltaTime;
         if (bulletTime > 0) return;
-        bulletTime = timer;
         GameObject bulletObj = Instantiate(cacadorBullet, spawnPoint.transform.position, spawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.AddForce(bulletRig.transform.forward * shootForce);
         Destroy(bulletObj, 2f);
+        bulletTime = timer;
     }
 
     public void Moving()
     {
 
         cacador.SetDestination(player.position);
+        Aim();
+
+
 
         if (atirando)
         {
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
-            aim.transform.LookAt(player.position);
+            Aim();
         }
 
 
@@ -192,12 +184,12 @@ public class Cacador : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            CacadorDie();
         }
 
     }
 
-    void Die()
+    void CacadorDie()
     {
         //anim de morte
         Destroy(gameObject);
@@ -223,5 +215,11 @@ public class Cacador : MonoBehaviour
 
             cacador.enabled = true;
         }
+    }
+
+    private void Aim()
+    {
+        Quaternion rotTarget = Quaternion.LookRotation(player.position - this.transform.position);
+        this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, rotTarget, aimSpeed * Time.deltaTime);
     }
 }
