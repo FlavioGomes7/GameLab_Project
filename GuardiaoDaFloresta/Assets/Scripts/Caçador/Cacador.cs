@@ -28,6 +28,7 @@ public class Cacador : MonoBehaviour
     public Transform aim;
     public GameObject waypoint;
     private float speed = 10;
+    public float aimSpeed;
    
 
 
@@ -71,7 +72,7 @@ public class Cacador : MonoBehaviour
 
 
 
-            if (enemyManager.alertStage == AlertStage.Curioso)
+            if (enemyManager.alertStage == AlertStage.Curioso || enemyManager.shortAlertStage == AlertStage.Curioso)
             {
                 Moving();
             }
@@ -120,22 +121,8 @@ public class Cacador : MonoBehaviour
                 cacador.angularSpeed = minAngularSpeed;
                 cacador.acceleration = minAcelerationSpeed;
             }
-            if (enemyManager.shortAlertStage == AlertStage.Curioso)
-            {
-                Moving();
-            }
-            else
-            {
-                if (cacador.remainingDistance <= cacador.stoppingDistance)
-                {
-                    Vector3 point;
-                    if (RandomPoint(centrePoint.position, range, out point))
-                    {
-                        Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-                        cacador.SetDestination(point);
-                    }
-                }
-            }
+            
+           
 
         }
 
@@ -158,11 +145,14 @@ public class Cacador : MonoBehaviour
     {
 
         cacador.SetDestination(player.position);
+        Aim();
+
+
 
         if (atirando)
         {
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
-            aim.transform.LookAt(player.position);
+            Aim();
         }
 
 
@@ -194,12 +184,12 @@ public class Cacador : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            CacadorDie();
         }
 
     }
 
-    void Die()
+    void CacadorDie()
     {
         //anim de morte
         Destroy(gameObject);
@@ -225,5 +215,11 @@ public class Cacador : MonoBehaviour
 
             cacador.enabled = true;
         }
+    }
+
+    private void Aim()
+    {
+        Quaternion rotTarget = Quaternion.LookRotation(player.position - this.transform.position);
+        this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, rotTarget, aimSpeed * Time.deltaTime);
     }
 }
