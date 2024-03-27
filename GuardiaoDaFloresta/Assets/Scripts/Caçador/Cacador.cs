@@ -192,7 +192,7 @@ public class Cacador : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            CacadorDie();
             GameManager.instance.AddMoney(100f);
         }
 

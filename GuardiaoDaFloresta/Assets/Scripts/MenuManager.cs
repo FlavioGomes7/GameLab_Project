@@ -52,11 +52,6 @@ public class MenuManager : MonoBehaviour
 
     public void OpenLevel(int index)
     {
-        GameObject mainMenu;
-        mainMenu = GameObject.FindGameObjectWithTag("Main Menu");
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(mainMenu);
-        mainMenu.SetActive(false);
         SceneManager.LoadScene(index);
     }
 

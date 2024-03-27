@@ -87,13 +87,16 @@ public class Lenhador : MonoBehaviour
     {
         currentHealth -= damage;
         SetCurrentHealth(currentHealth);
-        onTakeDamage();
         if (currentHealth <= 0)
         {
-            Die();
+            LenhadorDie();
             GameManager.instance.AddMoney(100f);
         }
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
     }
 
     void Die()
@@ -112,4 +115,6 @@ public class Lenhador : MonoBehaviour
     {
         slider.value = currentHealth;
     }
+
+    public
 }

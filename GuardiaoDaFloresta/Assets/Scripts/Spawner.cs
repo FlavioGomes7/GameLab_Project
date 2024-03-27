@@ -10,7 +10,6 @@ public class Spawner : MonoBehaviour
     private GameManager gameManager;
 
     //[SerializeField] private GameObject prefabEnemy;
-    [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private float countdown;
     [SerializeField] private float timeBetweenWaves;
@@ -21,37 +20,36 @@ public class Spawner : MonoBehaviour
 
     private SpawnState state = SpawnState.COUNTING;
 
+    [System.Serializable]
+    public class Enemy
+    {
+        public GameObject enemy;
+        public Transform spawnPoint;
+        public int index;
+        public int count;
+        public float rate;
+        public float waveRate;
+    }
+
 
     [System.Serializable]
-
     public class Wave
     {
         public string name;
-        public GameObject enemy;
-        public int count;
-        public float rate;
-        //public GameObject[] enemies;
-        //public float spawnRate;
-        //public float timeToNextWave;
-        ///*[HideInInspector]*/
-        //public int enemiesleft;
+        public Enemy[] enemies;
+
     }
 
     public void Start()
     {
         countdown = timeBetweenWaves;
-        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
     }
 
 
     public void Update()
     {
  
-        //if(currentWaveIndex >= waves.Length)
-        //{
-        //    Debug.Log("Acabou as Waves");
-        //    return;
-        //}
         if(state == SpawnState.WAITING)
         {
             if(!isEnemiesAlive())
@@ -69,7 +67,7 @@ public class Spawner : MonoBehaviour
         {
            if(state != SpawnState.SPAWNING)
             {
-                StartCoroutine( SpawnWave( waves[nextWave] ) );
+                StartCoroutine(SpawnWave(waves[nextWave]) );
             }
         }
         else
@@ -87,7 +85,7 @@ public class Spawner : MonoBehaviour
         if(searchCountDown <= 0)
         {
             searchCountDown = 1f;
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && GameObject.FindGameObjectsWithTag("Cacador").Length == 0)
             {
                 return false;
             }
@@ -101,43 +99,26 @@ public class Spawner : MonoBehaviour
     {
         Debug.Log("Spawning Wave: " + _wave.name);
         state = SpawnState.SPAWNING;
-
-        for(int i = 0; i < _wave.count; i++ )
+        foreach (Enemy v in _wave.enemies) 
         {
-            SpawnEnemy(_wave.enemy);
-            yield return new WaitForSeconds(_wave.rate);
+            StartCoroutine( SpawnEnemy(_wave.enemies, v.index, v.rate) );
+            yield return new WaitForSeconds(v.waveRate);
         }
-
+        yield return new WaitForSeconds(timeBetweenWaves);
         state = SpawnState.WAITING;
-        yield break;
 
-
-
-
-
-
-
-
-        //if(currentWaveIndex < waves.Length)
-        //{
-        //    WaitForSeconds wait = new WaitForSeconds(waves[currentWaveIndex].spawnRate);
-        //    for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
-        //    {
-        //        Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint);
-        //        waves[currentWaveIndex].enemiesleft--;
-        //        yield return wait;
-        //        if (waves[currentWaveIndex].enemiesleft == 0)
-        //        {
-        //            currentWaveIndex++;
-        //        }
-        //    }
-        //}
     }
 
-    private void SpawnEnemy(GameObject _enemy)
+    private IEnumerator SpawnEnemy(Enemy[] _enemy, int index, float _rate)
     {
-        Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
-        Debug.Log("Spawning Enemy: " + _enemy.name);
+        for(int i = 0; i < _enemy[index].count; i++)
+        {
+            Instantiate(_enemy[index].enemy, _enemy[index].spawnPoint.position, _enemy[index].spawnPoint.rotation);
+            //_enemy[index].enemy.GetComponent<Lenhador>().target = ;
+            Debug.Log("Spawning Enemy: " + _enemy[index].enemy.name);
+            yield return new WaitForSeconds(_rate);
+        }
+        
     }
 
     private void WaveCompleted()

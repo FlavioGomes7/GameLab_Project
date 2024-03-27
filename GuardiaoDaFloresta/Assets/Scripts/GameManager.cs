@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using JetBrains.Annotations;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,10 +32,7 @@ public class GameManager : MonoBehaviour
         UpdateTimeText();
 
 
-        CountObjectsWithTag();
-
-        
-
+        CountObjectsWithTag();     
 
     }
 
@@ -69,6 +67,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         winCanvas.SetActive(true);
+    }
+
+   public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        Time.timeScale = 1;
     }
 
    public void AddMoney(float value)

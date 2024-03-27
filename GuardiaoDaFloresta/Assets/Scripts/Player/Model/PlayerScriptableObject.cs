@@ -49,6 +49,7 @@ public class PlayerScriptableObject : ScriptableObject
         foreach (var s in statList)
         {
             s.statValue = 0;
+            moneyPlayer = 0;
         }
     }
 
