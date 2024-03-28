@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc841b5d19166fb48b2add31adb66043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5842317167578492938, guid: 13f3c7579ec76cf42a4ede9d53a8c880, type: 3}
+  target: {fileID: 0}
   animationDistanceThreshold: 2.5
   maxHealth: 10
   currentHealth: 0

@@ -114,7 +114,6 @@ public class Spawner : MonoBehaviour
         for(int i = 0; i < _enemy[index].count; i++)
         {
             Instantiate(_enemy[index].enemy, _enemy[index].spawnPoint.position, _enemy[index].spawnPoint.rotation);
-            //_enemy[index].enemy.GetComponent<Lenhador>().target = ;
             Debug.Log("Spawning Enemy: " + _enemy[index].enemy.name);
             yield return new WaitForSeconds(_rate);
         }
@@ -140,6 +139,7 @@ public class Spawner : MonoBehaviour
         }
 
     }
+
 
 
     

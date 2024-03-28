@@ -33,6 +33,7 @@ public class Lenhador : MonoBehaviour
         SetMaxHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        target = CloserTree();
 
     } 
  
@@ -43,17 +44,13 @@ public class Lenhador : MonoBehaviour
 
         if (target == null)
         {
-            agent.isStopped = true;
-            anim.SetBool("IsMoving", false);
-            anim.SetBool("Attacking", false);
-            return;
+            target = CloserTree(); 
         }
 
         if(agent != null)
         {
             agent.SetDestination(target.position);
         }
-
 
         if (agent.velocity.magnitude > 0)
         {
@@ -69,8 +66,6 @@ public class Lenhador : MonoBehaviour
         if (Vector3.Distance(agent.destination, transform.position) <= animationDistanceThreshold)
         {
             anim.SetBool("Attacking", true);
-
-
 
         }
         else
@@ -92,14 +87,9 @@ public class Lenhador : MonoBehaviour
             LenhadorDie();
             GameManager.instance.AddMoney(100f);
         }
-<<<<<<< Updated upstream
-
-=======
-        
->>>>>>> Stashed changes
     }
 
-    void Die()
+    void LenhadorDie()
     {
         //anim de morte
         Destroy(gameObject);
@@ -116,5 +106,25 @@ public class Lenhador : MonoBehaviour
         slider.value = currentHealth;
     }
 
-    public
+    private Transform CloserTree()
+    {
+        GameObject[] trees = GameObject.FindGameObjectsWithTag("Tree");
+        float minDistance = Mathf.Infinity;
+        float distance;
+        int indexOfCloserTree = 0;
+        for (int i = 0; i < trees.Length; i++)
+        {
+
+            distance = Vector3.Distance(transform.position, trees[i].transform.position);
+            if (minDistance > distance)
+            {
+                minDistance = distance;
+                indexOfCloserTree = i;
+
+            }
+
+        }
+        return trees[indexOfCloserTree].transform;
+    }
+
 }

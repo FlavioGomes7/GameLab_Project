@@ -26,7 +26,7 @@ public class Cacador : MonoBehaviour
     private float minAngularSpeed = 400f;
     private float minAcelerationSpeed = 5f;
     public Transform aim;
-    public GameObject waypoint;
+    public Transform waypoint;
     private float speed = 10;
     
 
@@ -52,6 +52,8 @@ public class Cacador : MonoBehaviour
         currentHealth = cacadorMaxHealth;
         SetMaxHealth(cacadorMaxHealth);
         bulletTime = timer;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        waypoint = CloserTree();
         Lenhador.onTakeDamage += Moving;
         
 
@@ -198,7 +200,7 @@ public class Cacador : MonoBehaviour
 
     }
 
-    void Die()
+    void CacadorDie()
     {
         //anim de morte
         Destroy(gameObject);
@@ -217,12 +219,33 @@ public class Cacador : MonoBehaviour
 
     public void ACAMINHO()
     {
-        Vector3 newPos = Vector3.MoveTowards(transform.position, waypoint.transform.position, speed * Time.deltaTime);
+        Vector3 newPos = Vector3.MoveTowards(transform.position, waypoint.position, speed * Time.deltaTime);
         transform.position = newPos;
-        if (transform.position == waypoint.transform.position)
+        if (transform.position == waypoint.position)
         {
 
             cacador.enabled = true;
         }
+    }
+
+    private Transform CloserTree()
+    {
+        GameObject[] trees = GameObject.FindGameObjectsWithTag("Tree");
+        float minDistance = Mathf.Infinity;
+        float distance;
+        int indexOfCloserTree = 0;
+        for (int i = 0; i < trees.Length; i++)
+        {
+
+            distance = Vector3.Distance(transform.position, trees[i].transform.position);
+            if (minDistance > distance)
+            {
+                minDistance = distance;
+                indexOfCloserTree = i;
+
+            }
+
+        }
+        return trees[indexOfCloserTree].transform;
     }
 }

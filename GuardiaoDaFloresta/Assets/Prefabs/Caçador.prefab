@@ -138,7 +138,6 @@ MonoBehaviour:
     m_intervalTime: 2
     m_initialTimingPhase: 0
   enemyManager: {fileID: 8989346954519450084}
-  cacador: {fileID: 4397575154041222285}
 --- !u!1 &2899501846385687255
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,11 +305,8 @@ MonoBehaviour:
   shootForce: 2000
   atirando: 0
   timer: 2
-  bulletTime: 0
   aim: {fileID: 3948414402814555056}
-  waypoint: {fileID: 6512139288386136752, guid: 13f3c7579ec76cf42a4ede9d53a8c880,
-    type: 3}
-  aimSpeed: 100
+  waypoint: {fileID: 0}
   cacadorMaxHealth: 20
   currentHealth: 0
   cacadorSlider: {fileID: 3120485993421584349}
@@ -353,7 +349,6 @@ MonoBehaviour:
   cacaDuration: 20
   cacaTimer: 0
   detectionReference: {fileID: 4511982461585674831}
-  playerInFOV: 0
   fov: 15
   fovAngle: 100
   shortFov: 2.5

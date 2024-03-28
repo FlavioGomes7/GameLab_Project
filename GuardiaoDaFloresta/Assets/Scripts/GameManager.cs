@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI timeText; 
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI pointsText;
     public string enemyTag = "Enemy"; 
     public TextMeshProUGUI enemyCountText; 
     public string treeTag = "tree";
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     void CountObjectsWithTag()
     {
-        
+        pointsText.text = "Pontos: " + stats.moneyPlayer;
         GameObject[] enemiesWithTag = GameObject.FindGameObjectsWithTag("Enemy");
         enemyCount = enemiesWithTag.Length;
         enemyCountText.text = "Inimigos: " + enemyCount.ToString();
