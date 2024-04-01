@@ -3,6 +3,7 @@ using TMPro;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int enemyCount = 0;
     public GameObject winCanvas;
     public GameObject loseCanvas;
+    public GameObject menuManager;
 
     [SerializeField] private PlayerScriptableObject stats;
     public static GameManager instance;
@@ -72,8 +74,8 @@ public class GameManager : MonoBehaviour
 
    public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.LoadScene(0);
         Time.timeScale = 1;
     }
 

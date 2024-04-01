@@ -84,7 +84,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9009811286763660833}
-  - component: {fileID: 8956335598142519426}
   m_Layer: 3
   m_Name: Laser
   m_TagString: Untagged
@@ -107,37 +106,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3948414402814555056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8956335598142519426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2839629136493693750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9080115ae493f49b2ed10a9edb40e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_data: {fileID: 11400000, guid: 9cd14a1f154e517408c169710f7b8b30, type: 2}
-  m_overrideExternalProperties: 1
-  m_inspectorProperties:
-    m_layerMask:
-      serializedVersion: 2
-      m_Bits: 4096
-    m_physicsType: 1
-    m_rayWidth: 0.1
-    m_angularRange: 360
-    m_raysNumber: 1
-    m_minRadialDistance: 1
-    m_maxRadialDistance: 25
-    m_rotate: 0
-    m_rotateClockwise: 1
-    m_rotationSpeed: 20
-    m_intermittent: 0
-    m_intervalTime: 2
-    m_initialTimingPhase: 0
-  enemyManager: {fileID: 8989346954519450084}
 --- !u!1 &2899501846385687255
 GameObject:
   m_ObjectHideFlags: 0

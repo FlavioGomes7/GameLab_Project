@@ -46,7 +46,7 @@ public class Cacador : MonoBehaviour
     private void Start()
     {
 
-        enemyManager = GetComponent<EnemyManager>();
+        //enemyManager = GetComponent<EnemyManager>();
         atirando = false;
         rb = GetComponent<Rigidbody>();
         currentHealth = cacadorMaxHealth;
