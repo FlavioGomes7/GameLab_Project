@@ -14,7 +14,7 @@ public class EnemyManagerEditor : Editor
         Color c = Color.green;
         if(enemy.alertStage == AlertStage.Curioso)
         {
-            c = Color.Lerp(Color.green, Color.red, enemy.alertLevel / 300f);
+            c = Color.Lerp(Color.green, Color.red, enemy.alertLevel / 2f);
         }
         else if(enemy.alertStage == AlertStage.Matar)
         {
