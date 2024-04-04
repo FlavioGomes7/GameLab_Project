@@ -2,10 +2,13 @@ using UnityEngine;
 using TMPro;
 using JetBrains.Annotations;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI timeText; 
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI pointsText;
     public string enemyTag = "Enemy"; 
     public TextMeshProUGUI enemyCountText; 
     public string treeTag = "tree";
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int enemyCount = 0;
     public GameObject winCanvas;
     public GameObject loseCanvas;
+    public GameObject menuManager;
 
     [SerializeField] private PlayerScriptableObject stats;
     public static GameManager instance;
@@ -31,10 +35,7 @@ public class GameManager : MonoBehaviour
         UpdateTimeText();
 
 
-        CountObjectsWithTag();
-
-        
-
+        CountObjectsWithTag();     
 
     }
 
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void CountObjectsWithTag()
     {
-        
+        pointsText.text = "Pontos: " + stats.moneyPlayer;
         GameObject[] enemiesWithTag = GameObject.FindGameObjectsWithTag("Enemy");
         enemyCount = enemiesWithTag.Length;
         enemyCountText.text = "Inimigos: " + enemyCount.ToString();
@@ -69,6 +70,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         winCanvas.SetActive(true);
+    }
+
+   public void BackToMenu()
+    {
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 
    public void AddMoney(float value)

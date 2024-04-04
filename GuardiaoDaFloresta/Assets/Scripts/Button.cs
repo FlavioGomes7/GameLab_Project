@@ -19,7 +19,7 @@ public class Button : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Application.Quit();
+            GameManager.instance.BackToMenu();
         }
 
 
@@ -33,8 +33,4 @@ public class Button : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
 }

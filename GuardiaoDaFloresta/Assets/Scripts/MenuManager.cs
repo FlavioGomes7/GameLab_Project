@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,9 +10,16 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [SerializeField] private PlayerScriptableObject scriptableObject;
 
+    [SerializeField] private TextMeshProUGUI pointsText;
+
     private void Start()
     {
         scriptableObject.ResetStatus();
+    }
+
+    private void Update()
+    {
+        pointsText.text = "Pontos: " + scriptableObject.moneyPlayer;
     }
 
     public void GoToTitleMenu()
@@ -52,17 +60,15 @@ public class MenuManager : MonoBehaviour
 
     public void OpenLevel(int index)
     {
-        GameObject mainMenu;
-        mainMenu = GameObject.FindGameObjectWithTag("Main Menu");
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(mainMenu);
-        mainMenu.SetActive(false);
         SceneManager.LoadScene(index);
     }
 
     public void Quit()
     {
+        scriptableObject.isReset = false;
         Debug.Log("Saiu");
         Application.Quit();
     }
+    
+ 
 }
