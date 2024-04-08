@@ -86,15 +86,12 @@ public class PlayerManager : MonoBehaviour
         {
             lenhadorComponent.TakeDamage(damageCurrent);
         }
-        else { return;}
 
         if (cacadorComponent != null)
         {
             cacadorComponent.TakeDamage(damageCurrent);
         }
-        else { return; }
     
-
     }
     
 

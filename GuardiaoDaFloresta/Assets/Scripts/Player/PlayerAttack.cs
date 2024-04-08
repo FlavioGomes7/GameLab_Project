@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private float damageMax;
     private float attackRangeMax;
 
-    public Transform attackPoint;
+    //public Transform attackPoint;
     public LayerMask enemyLayers;
 
     public void Start()
