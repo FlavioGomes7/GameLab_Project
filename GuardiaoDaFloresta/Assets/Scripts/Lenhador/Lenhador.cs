@@ -26,6 +26,8 @@ public class Lenhador : MonoBehaviour
     //Enemy UI
     [SerializeField] private Slider slider;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,8 @@ public class Lenhador : MonoBehaviour
         SetMaxHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-
+        target = CloserTree();
+        gameManager = GameManager.instance;
     } 
  
     // Update is called once per frame
@@ -88,6 +91,7 @@ public class Lenhador : MonoBehaviour
         if (currentHealth <= 0)
         {
             LenhadorDie();
+            gameManager.AddMoney(100);
         }
         onTakeDamage();
     }
@@ -108,5 +112,26 @@ public class Lenhador : MonoBehaviour
     public void SetCurrentHealth(float currentHealth)
     {
         slider.value = currentHealth;
+    }
+
+    private Transform CloserTree()
+    {
+        GameObject[] trees = GameObject.FindGameObjectsWithTag("Tree");
+        float minDistance = Mathf.Infinity;
+        float distance;
+        int indexOfCloserTree = 0;
+        for (int i = 0; i < trees.Length; i++)
+        {
+
+            distance = Vector3.Distance(transform.position, trees[i].transform.position);
+            if (minDistance > distance)
+            {
+                minDistance = distance;
+                indexOfCloserTree = i;
+
+            }
+
+        }
+        return trees[indexOfCloserTree].transform;
     }
 }

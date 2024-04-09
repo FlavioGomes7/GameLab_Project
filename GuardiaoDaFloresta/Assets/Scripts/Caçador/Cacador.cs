@@ -44,6 +44,7 @@ public class Cacador : MonoBehaviour
     public float range;
 
     public Transform centrePoint;
+    public GameManager gameManager;
 
     private void Start()
     {
@@ -53,8 +54,10 @@ public class Cacador : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentHealth = cacadorMaxHealth;
         SetMaxHealth(cacadorMaxHealth);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         bulletTime = timer;
         Lenhador.onTakeDamage += Moving;
+        gameManager = GameManager.instance;
 
         
 
@@ -185,6 +188,7 @@ public class Cacador : MonoBehaviour
         if (currentHealth <= 0)
         {
             CacadorDie();
+            gameManager.AddMoney(150);
         }
 
     }

@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         scriptableObject.ResetStatus();
+        scriptableObject.isReset = true;
     }
 
     private void Update()
