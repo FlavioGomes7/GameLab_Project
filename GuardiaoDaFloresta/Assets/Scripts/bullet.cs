@@ -11,7 +11,7 @@ public class bullet : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             
-            Debug.Log("acertei");
+            //Debug.Log("acertei");
             PlayerManager hp = collision.GetComponent<PlayerManager>();
             {
                 if (hp != null)

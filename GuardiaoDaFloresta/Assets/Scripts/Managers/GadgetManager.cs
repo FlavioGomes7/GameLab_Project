@@ -45,7 +45,14 @@ public class GadgetManager : MonoBehaviour
                 if (Mathf.Abs(signedAngle) < gadgetFovAngle / 2 )//&& !ObstacleBetween(transform.position, c.transform.position))
                 {
                     enemyInFOV = true;
-                    currentEnemy = c.transform;
+                    if (currentEnemy == null)
+                    {
+                        currentEnemy = c.transform;
+                    }
+                    else if (c.transform != currentEnemy)
+                    {
+                        currentEnemy = c.transform;
+                    }
 
                 }
                 break;
