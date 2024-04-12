@@ -16,11 +16,12 @@ public class GadgetBullet : MonoBehaviour
         if (lenhadorComponent != null)
         {
             lenhadorComponent.TakeDamage(damage);
+            Destroy(gameObject);
         }
-        if (cacadorComponent != null)
+      /*  if (cacadorComponent != null)
         {
             cacadorComponent.TakeDamage(damage);
-        }
+        }*/
 
 
     }

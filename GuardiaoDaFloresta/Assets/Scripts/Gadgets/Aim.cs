@@ -14,6 +14,11 @@ public class Aim : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(gadgetManager.currentEnemy.position);
+        if(gadgetManager.currentEnemy != null) 
+        {
+            Vector3 targetPosition = gadgetManager.currentEnemy.position + Vector3.up * 1.5f;
+            transform.LookAt(targetPosition);
+        }
+        
     }
 }
