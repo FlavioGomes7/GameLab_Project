@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    //Player Components
+    private CharacterController cc;
+    private Animator animator;
+    private InputHandler inputHandler;
+
     //Stats
     private float hpMax;
     private float damageMax;
@@ -20,6 +25,19 @@ public class PlayerManager : MonoBehaviour
     private float speedRateCurrent;
     private float pointsCurrent;
 
+    //Player Movement 
+    private Vector3 playerMovement;
+    [SerializeField] private float turnSmoothTime;
+    private float turnSmoothVelocity;
+
+    //Player Dash
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashTime;
+
+    //Player Attack
+    public bool canReceiveInput;
+    public bool inputReceived;
+
     //UI
     public HealthBar healthBar;
 
@@ -31,6 +49,35 @@ public class PlayerManager : MonoBehaviour
     //SO
     [SerializeField] private PlayerScriptableObject playerStats;
 
+    //M�todo para Lidar com movimentação do jogador 
+    private void HandleMovement()
+    {
+        playerMovement = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
+        if(playerMovement.magnitude >= 1)
+        {
+            HandleDash();
+            cc.Move(playerMovement * speedCurrent * Time.deltaTime);
+            animator.SetBool("isWalking", true);
+            float targetAngle = Mathf.Atan2(playerMovement.x, playerMovement.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        }
+        else
+        { animator.SetBool("isWalking", false); }
+       
+    }
+
+    private void HandleDash()
+    {
+        if(inputHandler.dashTriggered)
+        {
+            StartCoroutine(inputHandler.DashDelay(0.4f));
+            StartCoroutine(Dash());
+        }
+        else
+        {return;}
+    }
 
     //M�todo para receber dano e verificar se est� vivo ou morto
     public void TakeDamage(float damage)
@@ -52,8 +99,20 @@ public class PlayerManager : MonoBehaviour
         healthBar.SetCurrentHealth(hpMax);
     }
 
+    IEnumerator Dash()
+    {
+        speedCurrent = speedCurrent + dashForce;
+        yield return new WaitForSeconds(dashTime);
+        speedCurrent = speedCurrent - dashForce;
+    }
+
     void Start()
     {
+        //Set dos Componentes
+        cc = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        inputHandler = InputHandler.instance;
+
         //Set dos valores maximos + Possiveis Buffs
         hpMax = playerStats.HpMax;
         damageMax = playerStats.DamageMax;
@@ -75,6 +134,12 @@ public class PlayerManager : MonoBehaviour
 
         //Set Respawns
         length = respawns.Length;
+    }
+
+    public void Update()
+    {
+        HandleMovement();
+        Debug.Log(speedCurrent);
     }
 
     public void OnTriggerEnter(Collider other)
