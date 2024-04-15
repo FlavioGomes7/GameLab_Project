@@ -8,14 +8,14 @@ public class PlayerManager : MonoBehaviour
     private float hpMax;
     private float damageMax;
     private float speedMax;
-    private float speedRateMax;
     private float dashRedCooldown;
-    private float pointsInitMax;
     private float dashNumberMax;
+    private float pointsInitMax;
 
     //In-game stats
     private float hpCurrent;
     private float damageCurrent;
+    private float dashCooldown = 2f;
     private float speedCurrent;
     private float speedRateCurrent;
     private float pointsCurrent;
@@ -31,6 +31,35 @@ public class PlayerManager : MonoBehaviour
     //SO
     [SerializeField] private PlayerScriptableObject playerStats;
 
+    //M�todo para Lidar com movimentação do jogador 
+    private void HandleMovement()
+    {
+        playerMovement = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
+        if(playerMovement.magnitude >= 1)
+        {
+            HandleDash();
+            cc.Move(playerMovement * speedCurrent * Time.deltaTime);
+            animator.SetBool("isWalking", true);
+            float targetAngle = Mathf.Atan2(playerMovement.x, playerMovement.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        }
+        else
+        { animator.SetBool("isWalking", false); }
+       
+    }
+
+    private void HandleDash()
+    {
+        if(inputHandler.dashTriggered)
+        {
+            StartCoroutine(inputHandler.Delay(0.1f, "Dash"));
+            StartCoroutine(Dash());
+        }
+        else
+        {return;}
+    }
 
     //M�todo para receber dano e verificar se est� vivo ou morto
     public void TakeDamage(float damage)
@@ -49,25 +78,29 @@ public class PlayerManager : MonoBehaviour
     {
         transform.position = respawns[Random.Range(0, length)].position;
         hpCurrent = hpMax;
-        healthBar.SetCurrentHealth(hpMax);
+        healthBar.SetCurrentHealth(hpCurrent);
     }
 
     void Start()
     {
-        //Set dos valores maximos + Possiveis Buffs
+        //Set dos Componentes
+        cc = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        inputHandler = InputHandler.instance;
+
+        //Set dos valores maximos + Upgrades
         hpMax = playerStats.HpMax;
         damageMax = playerStats.DamageMax;
         speedMax = playerStats.SpeedMax;
-        speedRateMax = playerStats.SpeedRateMax;
         dashRedCooldown = playerStats.DashRedCooldown;
-        pointsInitMax = playerStats.PointInitMax;
         dashNumberMax = playerStats.DashNumberMax;
+        pointsInitMax = playerStats.PointInitMax;
+        
 
         //Set dos valores In-game, que poderam ser alterados.
         hpCurrent = hpMax;
         damageCurrent = damageMax;
         speedCurrent = speedMax;
-        speedRateCurrent = speedRateMax;
         pointsCurrent = pointsInitMax;
 
         //Settings UI

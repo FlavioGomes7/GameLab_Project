@@ -15,10 +15,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void Start()
     {
-        attackRangeMax = playerStats.RangeMax;
         damageMax = playerStats.DamageMax;
         damageCurrent = damageMax;
-
     }
 
     public void OnTriggerEnter(Collider other)
