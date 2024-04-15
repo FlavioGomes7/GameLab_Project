@@ -7,17 +7,17 @@ public class IdleBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        InputHandler.instance.canReceiveInput = true;
+        //InputHandler.instance.canReceiveInput = true;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(InputHandler.instance.inputReceived)
+        if(InputHandler.instance.attackTriggered)
         {
             animator.SetTrigger("AttackOne");
-            InputHandler.instance.AttackManger();
-            InputHandler.instance.inputReceived = false;
+            //InputHandler.instance.AttackManger();
+            //InputHandler.instance.inputReceived = false;
         }
     }
 

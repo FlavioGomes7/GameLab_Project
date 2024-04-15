@@ -26,6 +26,8 @@ public class Lenhador : MonoBehaviour
     //Enemy UI
     [SerializeField] private Slider slider;
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,7 @@ public class Lenhador : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         target = CloserTree();
-
+        gameManager = GameManager.instance;
     } 
  
     // Update is called once per frame
@@ -44,13 +46,15 @@ public class Lenhador : MonoBehaviour
 
         if (target == null)
         {
-            target = CloserTree(); 
+            agent.isStopped = true;
+            anim.SetBool("IsMoving", false);
+            anim.SetBool("Attacking", false);
+            return;
         }
 
-        if(agent != null)
-        {
-            agent.SetDestination(target.position);
-        }
+        agent.SetDestination(target.position);
+
+
 
         if (agent.velocity.magnitude > 0)
         {
@@ -66,6 +70,8 @@ public class Lenhador : MonoBehaviour
         if (Vector3.Distance(agent.destination, transform.position) <= animationDistanceThreshold)
         {
             anim.SetBool("Attacking", true);
+
+
 
         }
         else
@@ -85,14 +91,16 @@ public class Lenhador : MonoBehaviour
         if (currentHealth <= 0)
         {
             LenhadorDie();
-            GameManager.instance.AddMoney(100f);
+            gameManager.AddMoney(100);
         }
+        onTakeDamage();
     }
 
-    void LenhadorDie()
+    private void LenhadorDie()
     {
         //anim de morte
         Destroy(gameObject);
+        Debug.Log("morri");
     }
 
     public void SetMaxHealth(int maxHealth)
@@ -126,5 +134,4 @@ public class Lenhador : MonoBehaviour
         }
         return trees[indexOfCloserTree].transform;
     }
-
 }

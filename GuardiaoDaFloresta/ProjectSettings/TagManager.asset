@@ -9,7 +9,6 @@ TagManager:
   - Obstacle
   - Cacador
   - Main Menu
-  - LevelMenu
   layers:
   - Default
   - TransparentFX
@@ -24,7 +23,7 @@ TagManager:
   - Wall
   - Hunter
   - Player
-  - 
+  - Arbustos
   - 
   - 
   - 

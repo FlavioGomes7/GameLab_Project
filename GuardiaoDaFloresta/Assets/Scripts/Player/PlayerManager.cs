@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    //Player Components
+    private CharacterController cc;
+    private Animator animator;
+    private InputHandler inputHandler;
+
     //Stats
     private float hpMax;
     private float damageMax;
@@ -19,6 +24,19 @@ public class PlayerManager : MonoBehaviour
     private float speedCurrent;
     private float speedRateCurrent;
     private float pointsCurrent;
+
+    //Player Movement 
+    private Vector3 playerMovement;
+    [SerializeField] private float turnSmoothTime;
+    private float turnSmoothVelocity;
+
+    //Player Dash
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashTime;
+
+    //Player Attack
+    public bool canReceiveInput;
+    public bool inputReceived;
 
     //UI
     public HealthBar healthBar;
@@ -78,7 +96,14 @@ public class PlayerManager : MonoBehaviour
     {
         transform.position = respawns[Random.Range(0, length)].position;
         hpCurrent = hpMax;
-        healthBar.SetCurrentHealth(hpCurrent);
+        healthBar.SetCurrentHealth(hpMax);
+    }
+
+    IEnumerator Dash()
+    {
+        speedCurrent = speedCurrent + dashForce;
+        yield return new WaitForSeconds(dashTime);
+        speedCurrent = speedCurrent - dashForce;
     }
 
     void Start()
@@ -110,6 +135,12 @@ public class PlayerManager : MonoBehaviour
         length = respawns.Length;
     }
 
+    public void Update()
+    {
+        HandleMovement();
+        Debug.Log(speedCurrent);
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         Lenhador lenhadorComponent = other.GetComponent<Lenhador>();
@@ -125,9 +156,8 @@ public class PlayerManager : MonoBehaviour
         {
             cacadorComponent.TakeDamage(damageCurrent);
         }
-        else { return; }
+        else { return;}
     
-
     }
     
 
