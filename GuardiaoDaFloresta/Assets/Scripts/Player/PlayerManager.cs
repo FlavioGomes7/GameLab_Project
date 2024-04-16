@@ -20,9 +20,9 @@ public class PlayerManager : MonoBehaviour
     //In-game stats
     private float hpCurrent;
     private float damageCurrent;
-    private float dashCooldown = 2f;
     private float speedCurrent;
-    private float speedRateCurrent;
+    private float dashCooldown = 2f;
+    private float dashNumberCurrent;
     private float pointsCurrent;
 
     //Player Movement 
@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     private float turnSmoothVelocity;
 
     //Player Dash
+    private float dashDone = 0;
     [SerializeField] private float dashForce;
     [SerializeField] private float dashTime;
 
@@ -70,10 +71,19 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleDash()
     {
-        if(inputHandler.dashTriggered)
+ 
+        if (inputHandler.dashTriggered && dashDone < dashNumberCurrent)
         {
             StartCoroutine(inputHandler.Delay(0.1f, "Dash"));
             StartCoroutine(Dash());
+            dashDone++;
+            return;
+        }
+        else if(inputHandler.dashTriggered && dashDone >= dashNumberCurrent)
+        {
+            StartCoroutine(inputHandler.Delay(dashCooldown, "Dash"));
+            dashDone = 0;
+            return;
         }
         else
         {return;}
@@ -101,9 +111,9 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator Dash()
     {
-        speedCurrent = speedCurrent + dashForce;
+        speedCurrent += dashForce;
         yield return new WaitForSeconds(dashTime);
-        speedCurrent = speedCurrent - dashForce;
+        speedCurrent -= dashForce;
     }
 
     void Start()
@@ -126,6 +136,8 @@ public class PlayerManager : MonoBehaviour
         hpCurrent = hpMax;
         damageCurrent = damageMax;
         speedCurrent = speedMax;
+        dashCooldown -= dashRedCooldown;
+        dashNumberCurrent = dashNumberMax;
         pointsCurrent = pointsInitMax;
 
         //Settings UI
@@ -138,7 +150,7 @@ public class PlayerManager : MonoBehaviour
     public void Update()
     {
         HandleMovement();
-        Debug.Log(speedCurrent);
+        Debug.Log(dashCooldown);
     }
 
     public void OnTriggerEnter(Collider other)

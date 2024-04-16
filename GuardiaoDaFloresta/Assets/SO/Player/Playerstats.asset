@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpBase: 10
   damageBase: 2
-  rangeBase: 0
   speedBase: 5
-  speedRateBase: 0
   dashRedBase: 0
   dashNumberbase: 1
   isReset: 0
