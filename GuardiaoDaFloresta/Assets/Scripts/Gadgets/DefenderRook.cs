@@ -22,10 +22,6 @@ public class DefenderRook : MonoBehaviour
     {
         if(gadgetManager.currentEnemy != null)
         {
-            /*Vector3 directionToEnemy = gadgetManager.currentEnemy.position - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(directionToEnemy);
-            Quaternion yRotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, yRotation, Time.deltaTime * 360f);*/
             ShootEnemies();
         }
     }
