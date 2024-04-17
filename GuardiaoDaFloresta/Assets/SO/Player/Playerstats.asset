@@ -16,7 +16,7 @@ MonoBehaviour:
   damageBase: 2
   speedBase: 5
   dashRedBase: 0
-  dashNumberbase: 1
+  dashNumberbase: 4
   isReset: 0
   statList:
   - statType: hpMax

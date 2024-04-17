@@ -150,7 +150,6 @@ public class PlayerManager : MonoBehaviour
     public void Update()
     {
         HandleMovement();
-        Debug.Log(dashCooldown);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -162,13 +161,11 @@ public class PlayerManager : MonoBehaviour
         {
             lenhadorComponent.TakeDamage(damageCurrent);
         }
-        else { return;}
 
         if (cacadorComponent != null)
         {
             cacadorComponent.TakeDamage(damageCurrent);
         }
-        else { return;}
     
     }
     
