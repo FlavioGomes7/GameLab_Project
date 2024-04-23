@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
 
 
         CountObjectsWithTag();
-        Debug.Log(Time.timeScale);
     }
 
     void UpdateTimeText()

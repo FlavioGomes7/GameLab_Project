@@ -56,6 +56,15 @@ public class InputHandler : MonoBehaviour
         dashAction.Disable();
     }
 
+    public void SwichInput(string action, bool isEnable)
+    {
+        InputAction inputAction = playerControls.FindActionMap(actionMapName).FindAction(action);
+        if(isEnable)
+        { inputAction.Enable(); }
+        else
+        { inputAction.Disable(); }
+    }
+
     public IEnumerator Delay(float delay, string action)
     {
         InputAction inputAction = playerControls.FindActionMap(actionMapName).FindAction(action);

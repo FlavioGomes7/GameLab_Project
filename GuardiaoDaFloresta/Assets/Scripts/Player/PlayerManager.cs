@@ -36,8 +36,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float dashTime;
 
     //Player Attack
-    public bool canReceiveInput;
-    public bool inputReceived;
+    [SerializeField] private BoxCollider boxAttack;
+    [SerializeField] private SphereCollider sphereAttack;
+    [SerializeField] private Transform target;
+    private float speedForce = 0.1f;
 
     //UI
     public HealthBar healthBar;
@@ -71,7 +73,8 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleDash()
     {
- 
+        float dashDone = 0;
+
         if (inputHandler.dashTriggered && dashDone < dashNumberCurrent)
         {
             StartCoroutine(inputHandler.Delay(0.1f, "Dash"));
@@ -87,6 +90,50 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {return;}
+    }
+
+    private void HandleAttack()
+    {
+        if(inputHandler.attackTriggered)
+        {
+            speedCurrent = 0f;
+            animator.SetTrigger("Attack");
+            StartCoroutine(inputHandler.Delay(0.2f, "Attack"));     
+        }
+    }
+
+    public void ImpulseDamage()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speedForce);
+    }
+
+    public void ChangeSpeed(float refSpeed)
+    {
+        speedCurrent = refSpeed;
+    }
+
+    public void DealDamage(int attackNumber)
+    {
+        if(attackNumber == 1)
+        {
+            boxAttack.enabled = true;
+        }
+        else
+        {
+            sphereAttack.enabled = true;
+        }
+    }
+
+    public void EndDamage(int attackNumber)
+    {
+        if (attackNumber == 1)
+        {
+            boxAttack.enabled = false;
+        }
+        else
+        {
+            sphereAttack.enabled = false;
+        }
     }
 
     //M�todo para receber dano e verificar se est� vivo ou morto
@@ -139,7 +186,7 @@ public class PlayerManager : MonoBehaviour
         dashCooldown -= dashRedCooldown;
         dashNumberCurrent = dashNumberMax;
         pointsCurrent = pointsInitMax;
-
+   
         //Settings UI
         healthBar.SetMaxHealth(hpMax);
 
@@ -150,6 +197,8 @@ public class PlayerManager : MonoBehaviour
     public void Update()
     {
         HandleMovement();
+        HandleAttack();
+        Debug.Log(speedCurrent);
     }
 
     public void OnTriggerEnter(Collider other)
