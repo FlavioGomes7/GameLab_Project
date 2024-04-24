@@ -14,26 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpBase: 10
   damageBase: 2
-  rangeBase: 0
   speedBase: 5
-  speedRateBase: 0
   dashRedBase: 0
-  dashNumberbase: 0
+  dashNumberbase: 4
+  isReset: 0
   statList:
   - statType: hpMax
     statValue: 0
   - statType: damageMax
     statValue: 0
-  - statType: rangeMax
-    statValue: 0
   - statType: speedMax
-    statValue: 0
-  - statType: attackSpeedMax
     statValue: 0
   - statType: dashRedCooldown
     statValue: 0
-  - statType: pointsInitMax
-    statValue: 0
   - statType: dashNumberMax
     statValue: 0
-  moneyPlayer: 0
+  - statType: pointsInitMax
+    statValue: 0
+  moneyPlayer: 500
