@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -74,7 +75,6 @@ public class GameManager : MonoBehaviour
    public void BackToMenu()
     {
         SceneManager.LoadScene(0);
-        Time.timeScale = 1;
     }
 
    public void AddMoney(float value)

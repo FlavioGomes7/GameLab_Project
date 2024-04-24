@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -55,6 +57,7 @@ public class PlayerManager : MonoBehaviour
     //M�todo para Lidar com movimentação do jogador 
     private void HandleMovement()
     {
+
         playerMovement = new Vector3(inputHandler.moveInput.x, 0, inputHandler.moveInput.y);
         if(playerMovement.magnitude >= 1)
         {
@@ -64,16 +67,17 @@ public class PlayerManager : MonoBehaviour
             float targetAngle = Mathf.Atan2(playerMovement.x, playerMovement.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
+            //Debug.Log(angle);
+            //Debug.Log(targetAngle);
         }
         else
         { animator.SetBool("isWalking", false); }
-       
+ 
     }
 
+    //Método para lidar com o dash do jogador
     private void HandleDash()
     {
-        float dashDone = 0;
 
         if (inputHandler.dashTriggered && dashDone < dashNumberCurrent)
         {
@@ -92,6 +96,7 @@ public class PlayerManager : MonoBehaviour
         {return;}
     }
 
+    //Método para lidar com o ataque
     private void HandleAttack()
     {
         if(inputHandler.attackTriggered)
@@ -102,16 +107,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    //Método para impulsionar o player durante a animação de ataque
     public void ImpulseDamage()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speedForce);
     }
 
+    //Método para devolver a velocidade ao player ao fim da animação
     public void ChangeSpeed(float refSpeed)
     {
         speedCurrent = refSpeed;
     }
 
+    //Método para ativar os colliders de dano
     public void DealDamage(int attackNumber)
     {
         if(attackNumber == 1)
@@ -124,6 +132,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    //Método para desativar os colliders de dano
     public void EndDamage(int attackNumber)
     {
         if (attackNumber == 1)
@@ -177,7 +186,7 @@ public class PlayerManager : MonoBehaviour
         dashRedCooldown = playerStats.DashRedCooldown;
         dashNumberMax = playerStats.DashNumberMax;
         pointsInitMax = playerStats.PointInitMax;
-        
+
 
         //Set dos valores In-game, que poderam ser alterados.
         hpCurrent = hpMax;
@@ -186,19 +195,19 @@ public class PlayerManager : MonoBehaviour
         dashCooldown -= dashRedCooldown;
         dashNumberCurrent = dashNumberMax;
         pointsCurrent = pointsInitMax;
-   
+
         //Settings UI
         healthBar.SetMaxHealth(hpMax);
 
         //Set Respawns
         length = respawns.Length;
+
     }
 
     public void Update()
     {
         HandleMovement();
         HandleAttack();
-        Debug.Log(speedCurrent);
     }
 
     public void OnTriggerEnter(Collider other)

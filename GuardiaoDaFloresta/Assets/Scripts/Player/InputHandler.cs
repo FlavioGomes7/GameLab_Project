@@ -79,13 +79,8 @@ public class InputHandler : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-
+     
         moveAction = playerControls.FindActionMap(actionMapName).FindAction(move);
         attackAction = playerControls.FindActionMap(actionMapName).FindAction(attack);
         dashAction = playerControls.FindActionMap(actionMapName).FindAction(dash);
