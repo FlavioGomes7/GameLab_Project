@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     private float hpCurrent;
     private float damageCurrent;
     private float speedCurrent;
-    private float dashCooldown = 2f;
+    private float dashCooldown = 1.5f;
     private float dashNumberCurrent;
     private float pointsCurrent;
 
@@ -162,7 +162,7 @@ public class PlayerManager : MonoBehaviour
     {
         transform.position = respawns[Random.Range(0, length)].position;
         hpCurrent = hpMax;
-        healthBar.SetCurrentHealth(hpMax);
+        healthBar.SetCurrentHealth(hpCurrent);
     }
 
     IEnumerator Dash()
@@ -198,6 +198,7 @@ public class PlayerManager : MonoBehaviour
 
         //Settings UI
         healthBar.SetMaxHealth(hpMax);
+        healthBar.SetCurrentHealth(hpCurrent);
 
         //Set Respawns
         length = respawns.Length;
