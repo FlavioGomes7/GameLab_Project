@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Prefabs/Caçador .prefab.meta
+guid: 8a7679188dc06e445849a43c9643a766
+========
 guid: 129c855fb512ac446becafc035592f8f
+>>>>>>>> Flavio-Dev:GuardiaoDaFloresta/Assets/Prefabs/Enemy.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

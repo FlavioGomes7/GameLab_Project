@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731715, g: 0.13414735, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -889,7 +889,7 @@ MonoBehaviour:
     numberUpgradesMax: 2
     upgradesMadeIt: 0
     costUpgrade: 50
-    upgradeAmount: 5
+    upgradeAmount: 2
     statToUpgrade: damageMax
 --- !u!114 &153527758
 MonoBehaviour:
@@ -4670,7 +4670,7 @@ MonoBehaviour:
     description: "Aumenta a quantidade de avan\xE7os"
     numberUpgradesMax: 5
     upgradesMadeIt: 0
-    costUpgrade: 50
+    costUpgrade: 200
     upgradeAmount: 0.2
     statToUpgrade: dashRedCooldown
 --- !u!114 &1074312768
@@ -5132,7 +5132,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Custo: 500'
+  m_text: 'Custo: 200'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5404,7 +5404,7 @@ MonoBehaviour:
     numberUpgradesMax: 5
     upgradesMadeIt: 0
     costUpgrade: 50
-    upgradeAmount: 5
+    upgradeAmount: 1
     statToUpgrade: speedMax
 --- !u!114 &1316022740
 MonoBehaviour:

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Scripts/MenuManager.cs.meta
 guid: 6319f9598d7cd5a4380b33556eec85d5
+========
+guid: 062d05a51f222f74f889614a81130238
+>>>>>>>> main:GuardiaoDaFloresta/Assets/Scripts/Player/Upgrades/UpgradeData.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

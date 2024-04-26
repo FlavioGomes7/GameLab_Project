@@ -16,7 +16,7 @@ MonoBehaviour:
   damageBase: 2
   speedBase: 5
   dashRedBase: 0
-  dashNumberbase: 4
+  dashNumberbase: 1
   isReset: 0
   statList:
   - statType: hpMax
@@ -31,4 +31,4 @@ MonoBehaviour:
     statValue: 0
   - statType: pointsInitMax
     statValue: 0
-  moneyPlayer: 500
+  moneyPlayer: 0
