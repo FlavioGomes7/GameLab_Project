@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Scripts/Player/Upgrades/UpgradeData.cs.meta
 guid: 062d05a51f222f74f889614a81130238
+========
+guid: 001a030a60ad156408c61f9cedeb2421
+>>>>>>>> main:GuardiaoDaFloresta/Assets/Scripts/Spawner.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
