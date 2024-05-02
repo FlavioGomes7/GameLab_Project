@@ -59,7 +59,7 @@ public class InputHandler : MonoBehaviour
     public void SwichInput(string action, bool isEnable)
     {
         InputAction inputAction = playerControls.FindActionMap(actionMapName).FindAction(action);
-        if(isEnable)
+        if(isEnable == true)
         { inputAction.Enable(); }
         else
         { inputAction.Disable(); }

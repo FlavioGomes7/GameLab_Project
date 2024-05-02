@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Scripts/Player/Upgrades/UpgradeData.cs.meta
 guid: 062d05a51f222f74f889614a81130238
+========
+guid: 5f92b6c99a68c48408c6f5b3aaa913a2
+>>>>>>>> Flavio-Dev:GuardiaoDaFloresta/Assets/Scripts/Score/ScoreSystem.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

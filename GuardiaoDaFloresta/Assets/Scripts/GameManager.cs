@@ -16,12 +16,14 @@ public class GameManager : MonoBehaviour
     
     private float timer = 0f;
     private int enemyCount = 0;
+    [SerializeField] private GameObject spawner;
     public GameObject winCanvas;
     public GameObject loseCanvas;
 
 
     [SerializeField] private PlayerScriptableObject stats;
     public static GameManager instance;
+    [SerializeField] private ScoreSystem scoreSystem;
 
     public void Awake()
     {
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         if (treesWithTag.Length <= 0)
         {
-            Time.timeScale = 0;
+            scoreSystem.showScore.Invoke();
             loseCanvas.SetActive(true);
         }
 
@@ -68,8 +70,10 @@ public class GameManager : MonoBehaviour
 
     public void WinLevel()
     {
-        Time.timeScale = 0;
+        scoreSystem.winned.Invoke();
+        scoreSystem.showScore.Invoke();
         winCanvas.SetActive(true);
+        spawner.SetActive(false);
     }
 
    public void BackToMenu()
