@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
 
     //Player Dash
     private float dashDone = 0;
+    private bool canDash = true;
     [SerializeField] private float dashForce;
     [SerializeField] private float dashTime;
 
@@ -50,9 +51,10 @@ public class PlayerManager : MonoBehaviour
     public Transform[] respawns;
     public int length;
 
-
     //SO
     [SerializeField] private PlayerScriptableObject playerStats;
+
+    [SerializeField] private ScoreSystem scoreSystem;
 
     //M�todo para Lidar com movimentação do jogador 
     private void HandleMovement()
@@ -79,14 +81,14 @@ public class PlayerManager : MonoBehaviour
     private void HandleDash()
     {
 
-        if (inputHandler.dashTriggered && dashDone < dashNumberCurrent)
+        if (inputHandler.dashTriggered && dashDone < dashNumberCurrent && canDash)
         {
             StartCoroutine(inputHandler.Delay(0.1f, "Dash"));
             StartCoroutine(Dash());
             dashDone++;
             return;
         }
-        else if(inputHandler.dashTriggered && dashDone >= dashNumberCurrent)
+        else if(inputHandler.dashTriggered && dashDone >= dashNumberCurrent && canDash)
         {
             StartCoroutine(inputHandler.Delay(dashCooldown, "Dash"));
             dashDone = 0;
@@ -101,6 +103,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(inputHandler.attackTriggered)
         {
+            canDash = false;
             speedCurrent = 0f;
             animator.SetTrigger("Attack");
             StartCoroutine(inputHandler.Delay(0.2f, "Attack"));     
@@ -111,6 +114,11 @@ public class PlayerManager : MonoBehaviour
     public void ImpulseDamage()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speedForce);
+    }
+
+    public void CanDash()
+    {
+        canDash = true;
     }
 
     //Método para devolver a velocidade ao player ao fim da animação
@@ -150,9 +158,10 @@ public class PlayerManager : MonoBehaviour
     {
         hpCurrent = hpCurrent - damage;
         healthBar.SetCurrentHealth(hpCurrent);
+        scoreSystem.hitted.Invoke();
         if (hpCurrent <= 0)
         {
-           
+            StartCoroutine(inputHandler.Delay(0.1f, "Move"));
             Death();
         }
        
@@ -160,6 +169,7 @@ public class PlayerManager : MonoBehaviour
     //M�todo para excutar a morte
     public void Death()
     {
+        scoreSystem.died.Invoke();
         transform.position = respawns[Random.Range(0, length)].position;
         hpCurrent = hpMax;
         healthBar.SetCurrentHealth(hpCurrent);
@@ -167,9 +177,11 @@ public class PlayerManager : MonoBehaviour
 
     IEnumerator Dash()
     {
+        inputHandler.SwichInput("Attack", false);
         speedCurrent += dashForce;
         yield return new WaitForSeconds(dashTime);
         speedCurrent -= dashForce;
+        inputHandler.SwichInput("Attack", true);
     }
 
     void Start()
@@ -207,6 +219,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Update()
     {
+        Debug.Log(Time.timeScale);
         HandleMovement();
         HandleAttack();
     }

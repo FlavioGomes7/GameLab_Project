@@ -97,7 +97,6 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnWave(Wave _wave)
     {
-        Debug.Log("Spawning Wave: " + _wave.name);
         state = SpawnState.SPAWNING;
         foreach (Enemy v in _wave.enemies) 
         {
@@ -106,7 +105,6 @@ public class Spawner : MonoBehaviour
         }
         yield return new WaitForSeconds(timeBetweenWaves);
         state = SpawnState.WAITING;
-
     }
 
     private IEnumerator SpawnEnemy(Enemy[] _enemy, int index, float _rate)
@@ -114,7 +112,6 @@ public class Spawner : MonoBehaviour
         for(int i = 0; i < _enemy[index].count; i++)
         {
             Instantiate(_enemy[index].enemy, _enemy[index].spawnPoint.position, _enemy[index].spawnPoint.rotation);
-            Debug.Log("Spawning Enemy: " + _enemy[index].enemy.name);
             yield return new WaitForSeconds(_rate);
         }
         
@@ -122,16 +119,12 @@ public class Spawner : MonoBehaviour
 
     private void WaveCompleted()
     {
-        Debug.Log("Wave Completed");
-        
         state = SpawnState.COUNTING;
         countdown = timeBetweenWaves;
 
         if (nextWave + 1 > waves.Length - 1)
         {
-            Debug.Log("Voce Venceu");
-            gameManager.winCanvas.SetActive(true);
-            Time.timeScale = 0;
+            gameManager.WinLevel();
         }
         else
         {
