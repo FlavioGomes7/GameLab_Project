@@ -91,7 +91,7 @@ public class Lenhador : MonoBehaviour
         if (currentHealth <= 0)
         {
             LenhadorDie();
-            gameManager.AddMoney(100);
+            gameManager.OnDeath(100);
         }
         onTakeDamage();
     }
