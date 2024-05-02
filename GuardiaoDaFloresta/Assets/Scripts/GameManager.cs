@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
     public GameObject winCanvas;
     public GameObject loseCanvas;
 
-
-    [SerializeField] private PlayerScriptableObject stats;
     public static GameManager instance;
+    [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private PlayerScriptableObject stats;
     [SerializeField] private ScoreSystem scoreSystem;
 
     public void Awake()
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     void CountObjectsWithTag()
     {
-        pointsText.text = "Pontos: " + stats.moneyPlayer;
+        pointsText.text = "Pontos: " + playerManager.pointsCurrent;
         GameObject[] enemiesWithTag = GameObject.FindGameObjectsWithTag("Enemy");
         enemyCount = enemiesWithTag.Length;
         enemyCountText.text = "Inimigos: " + enemyCount.ToString();
@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-   public void AddMoney(float value)
+   public void OnDeath(float points)
    {
-        stats.moneyPlayer += value;
+        playerManager.AddPoints(points);
    }
 }

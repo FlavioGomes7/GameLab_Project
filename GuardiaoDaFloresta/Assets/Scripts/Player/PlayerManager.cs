@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     private float speedCurrent;
     private float dashCooldown = 1.5f;
     private float dashNumberCurrent;
-    private float pointsCurrent;
+    public float pointsCurrent {get; private set;}
 
     //Player Movement 
     private Vector3 playerMovement;
@@ -182,6 +182,11 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         speedCurrent -= dashForce;
         inputHandler.SwichInput("Attack", true);
+    }
+
+    public void AddPoints(float points)
+    {
+        pointsCurrent += points;
     }
 
     void Start()

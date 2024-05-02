@@ -188,7 +188,7 @@ public class Cacador : MonoBehaviour
         if (currentHealth <= 0)
         {
             CacadorDie();
-            gameManager.AddMoney(150);
+            gameManager.OnDeath(150);
         }
 
     }
