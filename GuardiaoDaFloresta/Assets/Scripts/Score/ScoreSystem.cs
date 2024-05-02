@@ -18,23 +18,29 @@ public class ScoreSystem : MonoBehaviour
 
     public void WasWinned()
     {
-        wasWinned = true;
-        score += 250;
-        Debug.Log(wasWinned);
+        if(!wasWinned)
+        {
+            wasWinned = true;
+            score += 250;
+        }
     }
 
     public void WasHitted()
     {
-        wasHitted = true;
-        score -= 500;
-        Debug.Log(wasHitted);
+        if (!wasHitted)
+        {
+            wasHitted = true;
+            score -= 500;
+        }  
     }
 
     public void WasDied()
     {
-        wasDied = true;
-        score -= 250;
-        Debug.Log(wasDied);
+        if(!wasDied)
+        {
+            wasDied = true;
+            score -= 250;
+        }
     }
 
     public void ShowScore()
