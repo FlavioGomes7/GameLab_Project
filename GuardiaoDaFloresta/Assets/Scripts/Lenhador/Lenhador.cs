@@ -42,7 +42,8 @@ public class Lenhador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        transform.LookAt(target.position);
 
         if (target == null)
         {
