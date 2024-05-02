@@ -9,14 +9,17 @@ public class GadgetBullet : MonoBehaviour
     public void OnTriggerEnter(Collider collider)
     {
         
-        
+
         Lenhador lenhadorComponent = collider.GetComponent<Lenhador>();
         Cacador cacadorComponent = collider.GetComponent<Cacador>();
+        
 
         if (lenhadorComponent != null)
         {
-            lenhadorComponent.TakeDamage(damage);
             Destroy(gameObject);
+            lenhadorComponent.TakeDamage(damage);
+            
+
         }
       /*  if (cacadorComponent != null)
         {
