@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         scoreSystem.showScore.Invoke();
         winCanvas.SetActive(true);
         spawner.SetActive(false);
+        playerManager.gameObject.SetActive(false);
     }
 
    public void BackToMenu()
