@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Editor/GadgetManagerEditor.cs.meta
+guid: 554ce9204b0ee294ba1429127c9e7745
+========
+guid: 001a030a60ad156408c61f9cedeb2421
+>>>>>>>> Flavio-Dev:GuardiaoDaFloresta/Assets/Scripts/Spawner.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

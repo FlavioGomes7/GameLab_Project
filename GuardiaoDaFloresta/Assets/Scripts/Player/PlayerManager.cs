@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     private float speedCurrent;
     private float dashCooldown = 1.5f;
     private float dashNumberCurrent;
-    public float pointsCurrent {get; private set;}
+    public float pointsCurrent {get; set;}
 
     //Player Movement 
     private Vector3 playerMovement;
