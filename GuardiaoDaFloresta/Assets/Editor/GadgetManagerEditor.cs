@@ -12,7 +12,7 @@ public class GadgetManagerEditor : Editor
 
 
         Color c = Color.green;
-        if (gadget.gadgetAlertStage == GadgetAlertStage.Atirar)
+        if (gadget.gadgetAlertStage == GadgetAlertStage.Ativar)
         {
             c = Color.red;
         }

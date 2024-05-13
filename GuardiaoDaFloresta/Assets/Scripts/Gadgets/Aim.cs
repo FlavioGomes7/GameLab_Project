@@ -16,7 +16,7 @@ public class Aim : MonoBehaviour
     {
         if(gadgetManager.currentEnemy != null) 
         {
-            Vector3 targetPosition = gadgetManager.currentEnemy.position + Vector3.up * 1.5f;
+            Vector3 targetPosition = gadgetManager.currentEnemy.transform.position + Vector3.up * 1.5f;
             transform.LookAt(targetPosition);
         }
         

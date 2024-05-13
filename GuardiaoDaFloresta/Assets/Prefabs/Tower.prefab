@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586a6552b08af5647a2905e599dd719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectarUmInimigoDeCadaVez: 1
+  detectarTodosOsInimigosDeUmaVez: 0
   gadgetFov: 18.05
   gadgetFovAngle: 360
   gadgetAlertStage: 0

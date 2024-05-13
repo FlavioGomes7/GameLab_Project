@@ -11,7 +11,7 @@ public class Lenhador : MonoBehaviour
 {
     //Enemy Movement
     public Transform target;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private Animator anim;
     public float animationDistanceThreshold;
     //Cacador sos;
