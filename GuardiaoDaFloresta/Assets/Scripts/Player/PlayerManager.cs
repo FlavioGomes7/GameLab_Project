@@ -42,6 +42,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private BoxCollider boxAttack;
     [SerializeField] private SphereCollider sphereAttack;
     [SerializeField] private Transform target;
+    private Vector3 refVelocity;
+    private float attackForce = 2f;
     private float speedForce = 0.1f;
 
     //UI
@@ -234,13 +236,17 @@ public class PlayerManager : MonoBehaviour
         Lenhador lenhadorComponent = other.GetComponent<Lenhador>();
         Cacador cacadorComponent = other.GetComponent<Cacador>();
 
-        if (lenhadorComponent != null)
+        if (other.CompareTag("Enemy") && lenhadorComponent != null)
         {
+            Vector3 hitDirection;
+            other.transform.position = Vector3.SmoothDamp(other.transform.position, hitDirection = (other.transform.localPosition - transform.localPosition) * 1.2f, ref refVelocity, attackForce * Time.deltaTime);
             lenhadorComponent.TakeDamage(damageCurrent);
         }
 
-        if (cacadorComponent != null)
+        if (other.CompareTag("Cacador") && cacadorComponent != null)
         {
+            Vector3 hitDirection;
+            other.transform.position = Vector3.SmoothDamp(other.transform.position, hitDirection = (other.transform.localPosition - transform.localPosition) * 1.2f, ref refVelocity, attackForce * Time.deltaTime);
             cacadorComponent.TakeDamage(damageCurrent);
         }
     
