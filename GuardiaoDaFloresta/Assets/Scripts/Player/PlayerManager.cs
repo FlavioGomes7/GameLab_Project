@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class PlayerManager : MonoBehaviour
@@ -42,9 +43,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private BoxCollider boxAttack;
     [SerializeField] private SphereCollider sphereAttack;
     [SerializeField] private Transform target;
+    [SerializeField] private Transform attackDirection;
     private Vector3 refVelocity;
-    private float attackForce = 2f;
+    [SerializeField] private float attackForce;
     private float speedForce = 0.1f;
+    private Vector3 direction;
 
     //UI
     public HealthBar healthBar;
@@ -222,6 +225,7 @@ public class PlayerManager : MonoBehaviour
         //Set Respawns
         length = respawns.Length;
 
+
     }
 
     public void Update()
@@ -238,15 +242,12 @@ public class PlayerManager : MonoBehaviour
 
         if (other.CompareTag("Enemy") && lenhadorComponent != null)
         {
-            Vector3 hitDirection;
-            other.transform.position = Vector3.SmoothDamp(other.transform.position, hitDirection = (other.transform.localPosition - transform.localPosition) * 1.2f, ref refVelocity, attackForce * Time.deltaTime);
+            other.GetComponent<Lenhador>().GetKnockback(direction, attackForce);
             lenhadorComponent.TakeDamage(damageCurrent);
         }
 
         if (other.CompareTag("Cacador") && cacadorComponent != null)
         {
-            Vector3 hitDirection;
-            other.transform.position = Vector3.SmoothDamp(other.transform.position, hitDirection = (other.transform.localPosition - transform.localPosition) * 1.2f, ref refVelocity, attackForce * Time.deltaTime);
             cacadorComponent.TakeDamage(damageCurrent);
         }
     

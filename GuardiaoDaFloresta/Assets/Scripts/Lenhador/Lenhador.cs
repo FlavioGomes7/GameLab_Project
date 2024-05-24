@@ -12,8 +12,11 @@ public class Lenhador : MonoBehaviour
     //Enemy Movement
     public Transform target;
     private NavMeshAgent agent;
+    private Rigidbody rb;
     private Animator anim;
     public float animationDistanceThreshold;
+    public float stillThreshold;
+    public float maxknockbackTime;
     //Cacador sos;
     public delegate void damage();
     public static event damage onTakeDamage;
@@ -35,6 +38,7 @@ public class Lenhador : MonoBehaviour
         SetMaxHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         target = CloserTree();
         gameManager = GameManager.instance;
     } 
@@ -71,9 +75,6 @@ public class Lenhador : MonoBehaviour
         if (Vector3.Distance(agent.destination, transform.position) <= animationDistanceThreshold)
         {
             anim.SetBool("Attacking", true);
-
-
-
         }
         else
         {
@@ -115,6 +116,39 @@ public class Lenhador : MonoBehaviour
         slider.value = currentHealth;
     }
 
+    public void GetKnockback(Vector3 force, float amountForce)
+    {
+        force = force - transform.position;
+        force *= amountForce;
+        StartCoroutine(ApplyKnockback(force));
+    }
+
+    public IEnumerator ApplyKnockback(Vector3 force)
+    {
+        yield return null;
+        agent.enabled = false;
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.AddForce(force);
+
+        yield return new WaitForFixedUpdate();
+        float knockbackTime = Time.time;
+        yield return new WaitUntil
+            (
+                () => rb.velocity.magnitude < stillThreshold || Time.time > knockbackTime + maxknockbackTime
+            );
+        yield return new WaitForSeconds(0.25f);
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        agent.Warp(transform.position);
+        agent.enabled = true;
+
+        yield return null;
+    }
+
     private Transform CloserTree()
     {
         GameObject[] trees = GameObject.FindGameObjectsWithTag("Tree");
@@ -129,7 +163,6 @@ public class Lenhador : MonoBehaviour
             {
                 minDistance = distance;
                 indexOfCloserTree = i;
-
             }
 
         }

@@ -12,7 +12,7 @@ public abstract class UpgradeData : MonoBehaviour
         public string upgradeName;
         public string description;
         public float numberUpgradesMax;
-        public float upgradesMadeIt;
+        public int upgradesMadeIt;
         public float costUpgrade;
         public float upgradeAmount;
         public string statToUpgrade;
