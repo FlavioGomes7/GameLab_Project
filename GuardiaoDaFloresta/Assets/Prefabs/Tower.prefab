@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28488905984761473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69a5de64f1828cb448395ed9716adf5f, type: 3}
   m_Name: 
@@ -59,6 +59,8 @@ GameObject:
   - component: {fileID: 841728648846095109}
   - component: {fileID: 231936597388564113}
   - component: {fileID: 4127969646438958898}
+  - component: {fileID: 6945394205256879222}
+  - component: {fileID: -8451440931244980114}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -160,19 +162,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93546350579556795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 586a6552b08af5647a2905e599dd719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detectarUmInimigoDeCadaVez: 1
-  detectarTodosOsInimigosDeUmaVez: 0
+  detectarTodosOsInimigos: 0
   gadgetFov: 18.05
   gadgetFovAngle: 360
   gadgetAlertStage: 0
   gadgetAlertLevel: 0
   enemyInFOV: 0
   currentEnemy: {fileID: 0}
+  targetsInFOV: []
 --- !u!114 &4127969646438958898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93546350579556795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5032ee8de45f23a44ae1db0bdfdf6fe9, type: 3}
   m_Name: 
@@ -191,3 +194,44 @@ MonoBehaviour:
   spawnBullet: {fileID: 2561773557710832494}
   bulletSpeed: 3500
   timer: 0.5
+--- !u!114 &6945394205256879222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93546350579556795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5151998edbc870a47b5b74ebfd6ff549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerBullet: {fileID: 3950299832673467528, guid: 45363f3ddd7b65741b941ed26e2af92a,
+    type: 3}
+  spawnBullet: {fileID: 2561773557710832494}
+  bulletSpeed: 3000
+  bulletCooldown: 0.5
+  enemies: []
+--- !u!136 &-8451440931244980114
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93546350579556795}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 19.502604
+  m_Height: 5.4306793
+  m_Direction: 1
+  m_Center: {x: -0.40394974, y: 0, z: 0}

@@ -26,6 +26,11 @@ public class Lenhador : MonoBehaviour
     //Enemy UI
     [SerializeField] private Slider slider;
 
+
+    public List<GameObject> towers = new List<GameObject>();
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +38,7 @@ public class Lenhador : MonoBehaviour
         SetMaxHealth(maxHealth);
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-
+        
     } 
  
     // Update is called once per frame
@@ -95,6 +100,11 @@ public class Lenhador : MonoBehaviour
     private void LenhadorDie()
     {
         //anim de morte
+        foreach(var tower in towers)
+        {
+            tower.GetComponent<ShootTower>().enemies.Remove(gameObject);
+        }
+
         Destroy(gameObject);
         Debug.Log("morri");
     }

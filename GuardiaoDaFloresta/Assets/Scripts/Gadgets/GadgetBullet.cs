@@ -5,7 +5,7 @@ using UnityEngine;
 public class GadgetBullet : MonoBehaviour
 {
     [SerializeField] private int damage;
-  
+   
     public void OnTriggerEnter(Collider collider)
     {
         
@@ -15,8 +15,9 @@ public class GadgetBullet : MonoBehaviour
 
         if (lenhadorComponent != null)
         {
-            lenhadorComponent.TakeDamage(damage);
-            Destroy(gameObject);
+            //lenhadorComponent.TakeDamage(damage);
+            
+            //Destroy(gameObject);
         }
       /*  if (cacadorComponent != null)
         {

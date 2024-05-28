@@ -389,7 +389,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6279944782117498938}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c04a63d584e38cb49a59057edbeb4e2c, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 1c4e690dc8e63a14391407c2664fe90c, type: 3}
   m_Controller: {fileID: 9100000, guid: 6b97bc12ee75ba0409fc7564048dc25b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -415,10 +415,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 5842317167578492938, guid: 13f3c7579ec76cf42a4ede9d53a8c880, type: 3}
+  agent: {fileID: 0}
   animationDistanceThreshold: 2.5
   maxHealth: 10
   currentHealth: 0
   slider: {fileID: 2471511491246945765}
+  tower: {fileID: 93546350579556795, guid: 2c5fc6716af246149a9df8882c52dd86, type: 3}
 --- !u!114 &6740522583957839764
 MonoBehaviour:
   m_ObjectHideFlags: 0

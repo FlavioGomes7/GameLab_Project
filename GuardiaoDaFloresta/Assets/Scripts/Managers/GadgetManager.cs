@@ -24,8 +24,8 @@ public class GadgetManager : MonoBehaviour
     [Header("O Current Enemy trabalha automaticamente")]
     public GameObject currentEnemy;
     private float reducedNavMeshSpeed = 1f;
-    
-    
+    public Collider[] targetsInFOV;
+
 
 
 
@@ -46,7 +46,7 @@ public class GadgetManager : MonoBehaviour
         bool enemyInFOV = false;
         if (detectarUmInimigoDeCadaVez)
         {
-            Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, gadgetFov);
+            targetsInFOV = Physics.OverlapSphere(transform.position, gadgetFov);
             foreach (Collider c in targetsInFOV)
             {
                 if (c.CompareTag("Enemy"))
@@ -75,8 +75,8 @@ public class GadgetManager : MonoBehaviour
         }
         if(detectarTodosOsInimigos)
         {
-            Collider[] targetsInFOV = Physics.OverlapSphere(transform.position, gadgetFov);
-            foreach (Collider c in targetsInFOV)
+            targetsInFOV = Physics.OverlapSphere(transform.position, gadgetFov);
+            /*foreach (Collider c in targetsInFOV)
             {
                 if (c.CompareTag("Enemy"))
                 {
@@ -95,7 +95,7 @@ public class GadgetManager : MonoBehaviour
                
 
 
-            }
+            }*/
         }
         
        
