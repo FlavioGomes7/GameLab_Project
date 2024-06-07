@@ -5,42 +5,37 @@ using UnityEngine.AI;
 
 public class SlowerTower : MonoBehaviour
 {
-    GadgetManager gadgetManager;
-    private float reducedNavMeshSpeed = 1f;
+    
+    private float reducedSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        gadgetManager = GetComponent<GadgetManager>();
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        DoSlow(gadgetManager.targetsInFOV);
-    }
-
-    public void DoSlow(Collider[] targetsInFOV)
-    {
-        foreach (Collider c in targetsInFOV)
+        if (other.tag == "Enemy")
         {
-            if (c.CompareTag("Enemy"))
+
+            NavMeshAgent navAgent = other.GetComponent<NavMeshAgent>();
+            if (navAgent != null)
             {
-                //enemyInFOV = true;
-
-                NavMeshAgent navAgent = c.GetComponent<NavMeshAgent>();
-                if (navAgent != null)
-                {
-                    navAgent.speed = reducedNavMeshSpeed;
-                }
-
-
-
-
+                navAgent.speed = reducedSpeed;
             }
 
 
 
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Enemy")
+        {
+            
         }
     }
 }
