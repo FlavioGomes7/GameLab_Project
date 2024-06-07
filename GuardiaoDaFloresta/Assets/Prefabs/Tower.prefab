@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4a931e7e0d5df4290c9688aef1f220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gadgetManager: {fileID: 4071288217667445201}
+  gadgetManager: {fileID: 0}
 --- !u!1 &4987529540116547264
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 7754407183403480970}
   - component: {fileID: 3758323568009337893}
   - component: {fileID: 7219837652909364028}
-  - component: {fileID: 4071288217667445201}
-  - component: {fileID: 5524659396365278249}
+  - component: {fileID: 8988758435549812706}
+  - component: {fileID: 7316244848715591530}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -153,7 +153,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4071288217667445201
+--- !u!114 &8988758435549812706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,30 +162,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4987529540116547264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9045015d78ca76a40b81ce9e049be0eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5151998edbc870a47b5b74ebfd6ff549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gadgetFov: 13.49
-  gadgetFovAngle: 360
-  gadgetAlertStage: 0
-  gadgetAlertLevel: 0
-  enemyInFOV: 0
-  currentEnemy: {fileID: 0}
---- !u!114 &5524659396365278249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4987529540116547264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc83b94350f2ae94cb08fe6eddad077c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletTime: 1
   towerBullet: {fileID: 3950299832673467528, guid: 0a63c737519c6e442b386fdb345cd15e,
     type: 3}
   spawnBullet: {fileID: 4632696259636898183}
   bulletSpeed: 3000
-  timer: 1
+  bulletCooldown: 0.5
+  enemies: []
+--- !u!136 &7316244848715591530
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987529540116547264}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 19.5026
+  m_Height: 5.430679
+  m_Direction: 1
+  m_Center: {x: -0.4039497, y: 0, z: 0}

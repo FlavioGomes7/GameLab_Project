@@ -272,11 +272,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc841b5d19166fb48b2add31adb66043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 8791184729063061855, guid: e465e7067e06d0e44a9949730b6571e1, type: 3}
+  agent: {fileID: 5324035498987753168}
   animationDistanceThreshold: 2.5
   maxHealth: 10
   currentHealth: 0
   slider: {fileID: 5385311460123866243}
+  towers: []
 --- !u!114 &5139571539636674737
 MonoBehaviour:
   m_ObjectHideFlags: 0
