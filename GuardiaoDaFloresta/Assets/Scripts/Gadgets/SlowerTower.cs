@@ -6,7 +6,9 @@ using UnityEngine.AI;
 public class SlowerTower : MonoBehaviour
 {
     
-    private float reducedSpeed = 1f;
+    public float velocidadeReduzida = 1f;
+    public float  velocidadeNormal = 3.5f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,7 @@ public class SlowerTower : MonoBehaviour
             NavMeshAgent navAgent = other.GetComponent<NavMeshAgent>();
             if (navAgent != null)
             {
-                navAgent.speed = reducedSpeed;
+                navAgent.speed = velocidadeReduzida;
             }
 
 
@@ -35,7 +37,11 @@ public class SlowerTower : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            
+            NavMeshAgent navAgent = other.GetComponent<NavMeshAgent>();
+            if (navAgent != null)
+            {
+                navAgent.speed = velocidadeNormal;
+            }
         }
     }
 }
