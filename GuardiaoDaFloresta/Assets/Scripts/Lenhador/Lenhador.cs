@@ -97,20 +97,20 @@ public class Lenhador : MonoBehaviour
         {
             LenhadorDie();
             gameManager.OnDeath(100);
+
         }
         onTakeDamage();
     }
 
     private void LenhadorDie()
     {
-        //anim de morte
+        Destroy(gameObject);
         foreach (var tower in towers)
         {
             tower.GetComponent<ShootTower>().enemies.Remove(gameObject);
         }
 
-        Destroy(gameObject);
-        Debug.Log("morri");
+        
     }
 
     public void SetMaxHealth(int maxHealth)

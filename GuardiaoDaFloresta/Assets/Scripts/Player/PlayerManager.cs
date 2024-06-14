@@ -224,7 +224,7 @@ public class PlayerManager : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
         HandleMovement();
         HandleAttack();
     }
