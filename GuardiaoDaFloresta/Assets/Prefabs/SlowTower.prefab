@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadeReduzida: 1
   velocidadeNormal: 3.5
+  overlapSphereRadius: 14
 --- !u!135 &3265641554684651338
 SphereCollider:
   m_ObjectHideFlags: 0

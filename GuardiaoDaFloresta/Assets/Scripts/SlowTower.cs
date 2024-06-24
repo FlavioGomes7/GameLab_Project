@@ -9,6 +9,7 @@ public class SlowTower : MonoBehaviour
 
     public float velocidadeReduzida = 1f;
     public float velocidadeNormal = 3.5f;
+    public float overlapSphereRadius = 30f;
     GadgetsInvocation gadgetsInvocation;
     
 
@@ -49,19 +50,26 @@ public class SlowTower : MonoBehaviour
 
     private void OnDestroy()
     {
-        Collider[] Colliders = Physics.OverlapSphere(gameObject.transform.position, 3);
+        Collider[] Colliders = Physics.OverlapSphere(gameObject.transform.position,overlapSphereRadius );
         foreach (Collider other in Colliders) 
         {
             if(other.gameObject.tag == "Enemy")
             {
-                NavMeshAgent navAgent = GetComponent<NavMeshAgent>();
-                if (navAgent != null)
+                NavMeshAgent navAgent = other.GetComponent<NavMeshAgent>();
+                Debug.Log("achei");
+                if (other != null)
                 {
                     navAgent.speed = velocidadeNormal;
                 }
 
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, overlapSphereRadius);
     }
 
 }
