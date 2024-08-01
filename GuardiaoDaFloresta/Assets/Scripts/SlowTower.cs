@@ -19,10 +19,11 @@ public class SlowTower : MonoBehaviour
         gadgetsInvocation = GetComponent<GadgetsInvocation>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Enemy")
         {
+            
 
             NavMeshAgent navAgent = other.GetComponent<NavMeshAgent>();
             if (navAgent != null)
