@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:GuardiaoDaFloresta/Assets/Scripts/EnemyIndicator.cs.meta
 guid: 379436168a7318246ac60c7ea8406dfc
+========
+guid: 817c58a267c8a774a9c45e831c87a8e6
+>>>>>>>> Flavio-Dev:GuardiaoDaFloresta/Assets/Scripts/Button.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -14,11 +14,11 @@ public class Aim : MonoBehaviour
 
     void Update()
     {
-        
-        
-         Vector3 targetPosition = gadgetManager.currentEnemy.transform.position + Vector3.up * 1.5f;
-         transform.LookAt(targetPosition);
-        
+        if(gadgetManager.currentEnemy != null) 
+        {
+            Vector3 targetPosition = gadgetManager.currentEnemy.position + Vector3.up * 1.5f;
+            transform.LookAt(targetPosition);
+        }
         
     }
 }

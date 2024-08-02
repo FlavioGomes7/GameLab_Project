@@ -20,7 +20,7 @@ public class DefenderRook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gadgetManager.gadgetAlertStage == GadgetAlertStage.Ativar)
+        if(gadgetManager.currentEnemy != null)
         {
             ShootEnemies();
         }

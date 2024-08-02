@@ -9,11 +9,11 @@ public class PlayerScriptableObject : ScriptableObject
 {
     [SerializeField] private float HpBase;
     [SerializeField] private float damageBase;
-    [SerializeField] private float rangeBase;
     [SerializeField] private float speedBase;
-    [SerializeField] private float speedRateBase;
     [SerializeField] private float dashRedBase;
     [SerializeField] private float dashNumberbase;
+
+    public bool isReset = false;
    
 
     [Serializable]
@@ -46,20 +46,26 @@ public class PlayerScriptableObject : ScriptableObject
 
     public void ResetStatus()
     {
-        foreach (var s in statList)
+        if (!isReset)
         {
-            s.statValue = 0;
+            foreach (var s in statList)
+            {
+                s.statValue = 0;
+                moneyPlayer = 0;
+                isReset = true;
+            }
         }
+        else
+        { return;}
     }
 
     public float HpMax => statList[0].statValue + HpBase;
     public float DamageMax => statList[1].statValue + damageBase;
-    public float RangeMax => statList[2].statValue + rangeBase;
-    public float SpeedMax => statList[3].statValue + speedBase;
-    public float SpeedRateMax => statList[4].statValue + speedRateBase;
-    public float DashRedCooldown => statList[5].statValue + dashRedBase;
-    public float PointInitMax => statList[6].statValue;
-    public float DashNumberMax => statList[7].statValue + dashNumberbase;
+    public float SpeedMax => statList[2].statValue + speedBase;
+    public float DashRedCooldown => statList[3].statValue + dashRedBase;
+    public float DashNumberMax => statList[4].statValue + dashNumberbase;
+    public float PointInitMax => statList[5].statValue;
+
     public float moneyPlayer;
 
     

@@ -4,20 +4,51 @@ using UnityEngine;
 
 public class GadgetsInvocation : MonoBehaviour
 {
-    public GameObject Gadget;
+    public GameObject gadget;
+    public GameObject gadgetTwo;
     public Transform spawnGadgets;
+    public float gadgetLifetime;
+    PlayerManager playerManager;
+    public int towerPointsRequired;
+    //public bool towerReady;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerManager = GetComponent<PlayerManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        TowerDefense();
+        SlowTower();
+    }
+
+    public void TowerDefense()
+    {
+        if (playerManager.pointsCurrent >= towerPointsRequired)
         {
-            Instantiate(Gadget, spawnGadgets.transform.position, spawnGadgets.transform.rotation);
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GameObject newGadget = Instantiate(gadget, spawnGadgets.position, spawnGadgets.rotation);
+                playerManager.pointsCurrent -= towerPointsRequired;
+                Destroy(newGadget, gadgetLifetime); 
+            }
         }
     }
+
+    public void SlowTower()
+    {
+        if (playerManager.pointsCurrent >= towerPointsRequired)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GameObject newGadget = Instantiate(gadgetTwo, spawnGadgets.position, spawnGadgets.rotation);
+                playerManager.pointsCurrent -= towerPointsRequired;
+                Destroy(newGadget, gadgetLifetime);
+            }
+        }
+    }
+    
 }

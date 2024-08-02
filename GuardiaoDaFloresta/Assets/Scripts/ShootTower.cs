@@ -20,13 +20,13 @@ public class ShootTower : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
-            
+
             enemies.Add(other.gameObject);
             other.gameObject.GetComponent<Lenhador>().towers.Add(this.gameObject);
-         
-   
+
+
 
         }
 
@@ -43,7 +43,7 @@ public class ShootTower : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (enemies.Count > 0)
         {
             bulletCooldown -= Time.deltaTime;
@@ -54,8 +54,8 @@ public class ShootTower : MonoBehaviour
 
             }
         }
-        
-        
+
+
     }
 
     private void ShootEnemies()
@@ -73,11 +73,12 @@ public class ShootTower : MonoBehaviour
 
     private void MirareAtirar()
     {
-       
-        spawnBullet.transform.LookAt(enemies[0].transform);
+        Vector3 targetposition = enemies[0].transform.position + Vector3.up * 1.5f;
+        spawnBullet.transform.LookAt(targetposition);
         ShootEnemies();
-        
+
     }
 
-   
+
 }
+
