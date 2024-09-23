@@ -511,7 +511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cacador: {fileID: 6601195330004220190}
   player: {fileID: 0}
-  cacadorBullet: {fileID: 3950299832673467528, guid: d5c9acde15b09cc4293985e682f006ed,
+  cacadorBullet: {fileID: 5002879174173551272, guid: 0b28f4cc29c8dfe44893f09243f4abbc,
     type: 3}
   spawnPoint: {fileID: 351888518358964424}
   shootForce: 2000
@@ -526,6 +526,7 @@ MonoBehaviour:
   cacadorSlider: {fileID: 2995762446759723722}
   range: 20
   centrePoint: {fileID: 2269566522112098962}
+  gameManager: {fileID: 0}
 --- !u!195 &6601195330004220190
 NavMeshAgent:
   m_ObjectHideFlags: 0

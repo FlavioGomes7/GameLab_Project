@@ -165,10 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5151998edbc870a47b5b74ebfd6ff549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerBullet: {fileID: 3950299832673467528, guid: 0a63c737519c6e442b386fdb345cd15e,
+  towerBullet: {fileID: 7107278787945096378, guid: 37f99be3610150b4bad4c27f00806cec,
     type: 3}
   spawnBullet: {fileID: 4632696259636898183}
-  bulletSpeed: 3000
+  bulletSpeed: 1000
   bulletCooldown: 0.5
   enemies: []
 --- !u!136 &7316244848715591530
