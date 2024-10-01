@@ -242,7 +242,7 @@ public class PlayerManager : MonoBehaviour
 
         if (other.CompareTag("Enemy") && lenhadorComponent != null)
         {
-            other.GetComponent<Lenhador>().GetKnockback(direction, attackForce);
+            //other.GetComponent<Lenhador>().GetKnockback(direction, attackForce);
             lenhadorComponent.TakeDamage(damageCurrent);
         }
 
