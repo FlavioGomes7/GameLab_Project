@@ -66,6 +66,7 @@ public class MenuManager : MonoBehaviour
 
     public void Quit()
     {
+        PlayerPrefs.DeleteAll();
         scriptableObject.isReset = false;
         Debug.Log("Saiu");
         Application.Quit();

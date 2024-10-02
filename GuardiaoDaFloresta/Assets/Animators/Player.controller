@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 1a2a52f1b165a5d4c8d73a0fdd214f8c,
+  m_Motion: {fileID: 5449443280318593900, guid: ad479c9d893ac8241a1963371d625f81,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -636,7 +636,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Two Hand Sword Combo (1)@Running
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4817770690402701358}
@@ -650,7 +650,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: d0d7638f6c42c524992c4a893f44e137,
+  m_Motion: {fileID: 5955407226217017488, guid: ad479c9d893ac8241a1963371d625f81,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
